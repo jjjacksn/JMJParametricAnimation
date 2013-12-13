@@ -4,76 +4,80 @@
 
 @implementation CAKeyframeAnimation (Parametric)
 
-#pragma mark - convenience creators
+
+#pragma mark - convenience constructors
+
 + (id)animationWithKeyPath:(NSString *)path
-                   timeFxn:(KeyframeParametricTimeBlock)timeFxn
+                   timeFxn:(ParametricTimeBlock)timeFxn
                 fromDouble:(double)fromValue
                   toDouble:(double)toValue
 {
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:path
                                                                        timeFxn:timeFxn
-                                                                      valueFxn:CAKeyframeAnimationParametricValueBlockDouble
+                                                                      valueFxn:kParametricValueBlockDouble
                                                                      fromValue:@(fromValue)
                                                                        toValue:@(toValue)];
     return animation;
 }
 
 + (id)animationWithKeyPath:(NSString *)path
-                   timeFxn:(KeyframeParametricTimeBlock)timeFxn
+                   timeFxn:(ParametricTimeBlock)timeFxn
                  fromPoint:(CGPoint)fromValue
                    toPoint:(CGPoint)toValue
 {
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:path
                                                                        timeFxn:timeFxn
-                                                                      valueFxn:CAKeyframeAnimationParametricValueBlockPoint
+                                                                      valueFxn:kParametricValueBlockPoint
                                                                      fromValue:[NSValue valueWithCGPoint:fromValue]
                                                                        toValue:[NSValue valueWithCGPoint:toValue]];
     return animation;
 }
 
 + (id)animationWithKeyPath:(NSString *)path
-                   timeFxn:(KeyframeParametricTimeBlock)timeFxn
+                   timeFxn:(ParametricTimeBlock)timeFxn
                   fromSize:(CGSize)fromValue
                     toSize:(CGSize)toValue
 {
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:path
                                                                        timeFxn:timeFxn
-                                                                      valueFxn:CAKeyframeAnimationParametricValueBlockSize
+                                                                      valueFxn:kParametricValueBlockSize
                                                                      fromValue:[NSValue valueWithCGSize:fromValue]
                                                                        toValue:[NSValue valueWithCGSize:toValue]];
     return animation;
 }
 
 + (id)animationWithKeyPath:(NSString *)path
-                   timeFxn:(KeyframeParametricTimeBlock)timeFxn
+                   timeFxn:(ParametricTimeBlock)timeFxn
                   fromRect:(CGRect)fromValue
                     toRect:(CGRect)toValue
 {
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:path
                                                                        timeFxn:timeFxn
-                                                                      valueFxn:CAKeyframeAnimationParametricValueBlockRect
+                                                                      valueFxn:kParametricValueBlockRect
                                                                      fromValue:[NSValue valueWithCGRect:fromValue]
                                                                        toValue:[NSValue valueWithCGRect:toValue]];
     return animation;
 }
 
 + (id)animationWithKeyPath:(NSString *)path
-                   timeFxn:(KeyframeParametricTimeBlock)timeFxn
+                   timeFxn:(ParametricTimeBlock)timeFxn
                  fromColor:(CGColorRef)fromValue
                    toColor:(CGColorRef)toValue
 {
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:path
                                                                        timeFxn:timeFxn
-                                                                      valueFxn:CAKeyframeAnimationParametricValueBlockColor
+                                                                      valueFxn:kParametricValueBlockColor
                                                                      fromValue:(__bridge id)fromValue
                                                                        toValue:(__bridge id)toValue];
     return animation;
 }
 
+
 #pragma mark - generic core
+
 + (id)animationWithKeyPath:(NSString *)path
-                   timeFxn:(KeyframeParametricTimeBlock)timeFxn
-                  valueFxn:(KeyframeParametricValueBlock)valueFxn
+                   timeFxn:(ParametricTimeBlock)timeFxn
+                  valueFxn:(ParametricValueBlock)valueFxn
                  fromValue:(NSValue *)fromValue
                    toValue:(NSValue *)toValue;
 {
@@ -87,8 +91,8 @@
 }
 
 + (id)animationWithKeyPath:(NSString *)path
-                   timeFxn:(KeyframeParametricTimeBlock)timeFxn
-                  valueFxn:(KeyframeParametricValueBlock)valueFxn
+                   timeFxn:(ParametricTimeBlock)timeFxn
+                  valueFxn:(ParametricValueBlock)valueFxn
                  fromValue:(NSValue *)fromValue
                    toValue:(NSValue *)toValue
                    inSteps:(NSUInteger)numSteps
@@ -128,7 +132,9 @@
     return animation;
 }
 
+
 #pragma mark - bezier helpers
+
 double bezier(double time, double A, double B, double C)
 {
     return time * (C + time * (B + time * A)); //A t^3 + B t^2 + C t
@@ -168,79 +174,81 @@ const double (^bezierEvaluator)(double, CGPoint, CGPoint) = ^(double time, CGPoi
     return bezier(xForTime(time, ct1.x, ct2.x), Ay, By, Cy);
 };
 
-#pragma mark - Time blocks
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockLinear =
+
+#pragma mark - time blocks
+
+const ParametricTimeBlock kParametricTimeBlockLinear =
 ^(double time) {
     return time;
 };
 
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockAppleIn =
+const ParametricTimeBlock kParametricTimeBlockAppleIn =
 ^(double time) {
     CGPoint ct1 = CGPointMake(0.42, 0.0), ct2 = CGPointMake(1.0, 1.0);
     return bezierEvaluator(time, ct1, ct2);
 };
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockAppleOut =
+const ParametricTimeBlock kParametricTimeBlockAppleOut =
 ^(double time) {
     CGPoint ct1 = CGPointMake(0.0, 0.0), ct2 = CGPointMake(0.58, 1.0);
     return bezierEvaluator(time, ct1, ct2);
 };
 
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockAppleInOut =
+const ParametricTimeBlock kParametricTimeBlockAppleInOut =
 ^(double time) {
     CGPoint ct1 = CGPointMake(0.42, 0.0), ct2 = CGPointMake(0.58, 1.0);
     return bezierEvaluator(time, ct1, ct2);
 };
 
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockBackIn =
+const ParametricTimeBlock kParametricTimeBlockBackIn =
 ^(double time) {
     CGPoint ct1 = CGPointMake(0.6, -0.28), ct2 = CGPointMake(0.735, 0.045);
     return bezierEvaluator(time, ct1, ct2);
 };
 
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockBackOut =
+const ParametricTimeBlock kParametricTimeBlockBackOut =
 ^(double time) {
     CGPoint ct1 = CGPointMake(0.175, 0.885), ct2 = CGPointMake(0.32, 1.275);
     return bezierEvaluator(time, ct1, ct2);
 };
 
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockBackInOut =
+const ParametricTimeBlock kParametricTimeBlockBackInOut =
 ^(double time) {
     CGPoint ct1 = CGPointMake(0.68, -0.55), ct2 = CGPointMake(0.265, 1.55);
     return bezierEvaluator(time, ct1, ct2);
 };
 
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockQuadraticIn =
+const ParametricTimeBlock kParametricTimeBlockQuadraticIn =
 ^(double time) {
     return pow(time, 2);
 };
 
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockQuadraticOut =
+const ParametricTimeBlock kParametricTimeBlockQuadraticOut =
 ^(double time) {
     return 1 - pow(1 - time, 2);
 };
 
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockCubicIn =
+const ParametricTimeBlock kParametricTimeBlockCubicIn =
 ^(double time) {
     return pow(time, 3);
 };
 
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockCubicOut =
+const ParametricTimeBlock kParametricTimeBlockCubicOut =
 ^(double time) {
     return pow(time, 3);
 };
 
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockCubicInOut =
+const ParametricTimeBlock kParametricTimeBlockCubicInOut =
 ^(double time) {
     time *= 2.0;
-	if (time < 1) {
+  if (time < 1) {
         return 0.5 * pow(time, 3);
     }
 
-	time -= 2;
-	return 0.5 * pow(time, 3) + 1;
+  time -= 2;
+  return 0.5 * pow(time, 3) + 1;
 };
 
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockExpoIn =
+const ParametricTimeBlock kParametricTimeBlockExpoIn =
 ^(double time) {
     if (time == 0.0) {
         return 0.0;
@@ -248,7 +256,7 @@ const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockExpoIn =
     return pow(2, 10 * (time - 1));
 };
 
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockExpoOut =
+const ParametricTimeBlock kParametricTimeBlockExpoOut =
 ^(double time) {
     if (time == 1.0) {
         return 1.0;
@@ -256,7 +264,7 @@ const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockExpoOut 
     return -pow(2, -10 * time) + 1;
 };
 
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockExpoInOut =
+const ParametricTimeBlock kParametricTimeBlockExpoInOut =
 ^(double time) {
     if (time == 0) {
         return 0.0;
@@ -270,32 +278,32 @@ const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockExpoInOu
     return 0.5 * (-pow(2, -10 * time) + 2);
 };
 
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockCircularIn =
+const ParametricTimeBlock kParametricTimeBlockCircularIn =
 ^(double time) {
     return 1 - sqrt(1 - time * time);
 };
 
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockCircularOut =
+const ParametricTimeBlock kParametricTimeBlockCircularOut =
 ^(double time) {
     return sqrt(1 - pow(time - 1, 2));
 };
 
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockSineIn =
+const ParametricTimeBlock kParametricTimeBlockSineIn =
 ^(double time) {
     return -cos(time * M_PI / 2) + 1;
 };
 
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockSineOut =
+const ParametricTimeBlock kParametricTimeBlockSineOut =
 ^(double time) {
     return -cos(time * M_PI / 2) + 1;
 };
 
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockSineInOut =
+const ParametricTimeBlock kParametricTimeBlockSineInOut =
 ^(double time) {
     return -0.5 * cos(time * M_PI) + 0.5;
 };
 
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockSquashedSineInOut =
+const ParametricTimeBlock kParametricTimeBlockSquashedSineInOut =
 ^(double time) {
     double squashFactor = 0.75;
     return squashFactor * (-0.5 * cos(time * M_PI) + 0.5) + 0.5 * squashFactor;
@@ -304,7 +312,7 @@ const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockSquashed
 #define DEFAULT_ELASTIC_PERIOD 0.3
 #define DEFAULT_ELASTIC_AMPLITUDE 1.0
 #define DEFAULT_ELASTIC_SHIFT_RATIO 0.25
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockElasticIn =
+const ParametricTimeBlock kParametricTimeBlockElasticIn =
 ^(double time) {
     if (time <= 0.0) return 0.0;
     if (time >= 1.0) return 1.0;
@@ -313,11 +321,11 @@ const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockElasticI
     double shift = period * DEFAULT_ELASTIC_SHIFT_RATIO;
 
     double result = - amplitude * pow(2, 10 * (time - 1)) * // amplitude growth
-             sin( (time - 1 - shift) * 2 * M_PI / period);
+    sin( (time - 1 - shift) * 2 * M_PI / period);
 
     return result;
 };
-const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockElasticOut =
+const ParametricTimeBlock kParametricTimeBlockElasticOut =
 ^(double time) {
     if (time <= 0.0) return 0.0;
     if (time >= 1.0) return 1.0;
@@ -326,14 +334,14 @@ const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockElasticO
     double shift = period * DEFAULT_ELASTIC_SHIFT_RATIO;
 
     double result = amplitude * pow(2, -10 * time) * // amplitude decay
-                    sin( (time - shift) * 2 * M_PI / period) + 1;
+    sin( (time - shift) * 2 * M_PI / period) + 1;
 
     return result;
 };
 
-+ (KeyframeParametricTimeBlock)elasticParametricTimeBlockWithEaseIn:(BOOL)easeIn
-                                                             period:(double)period
-                                                          amplitude:(double)amplitude
++ (ParametricTimeBlock)elasticParametricTimeBlockWithEaseIn:(BOOL)easeIn
+                                                     period:(double)period
+                                                  amplitude:(double)amplitude
 {
     return [self elasticParametricTimeBlockWithEaseIn:easeIn
                                                period:period
@@ -341,22 +349,22 @@ const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockElasticO
                                         andShiftRatio:DEFAULT_ELASTIC_SHIFT_RATIO];
 }
 
-+ (KeyframeParametricTimeBlock)elasticParametricTimeBlockWithEaseIn:(BOOL)easeIn
-                                                             period:(double)period
-                                                          amplitude:(double)amplitude
-                                                            bounded:(BOOL)bounded
++ (ParametricTimeBlock)elasticParametricTimeBlockWithEaseIn:(BOOL)easeIn
+                                                     period:(double)period
+                                                  amplitude:(double)amplitude
+                                                    bounded:(BOOL)bounded
 {
     return [self elasticParametricTimeBlockWithEaseIn:easeIn
                                                period:period
                                             amplitude:amplitude
-                                        andShiftRatio:DEFAULT_ELASTIC_AMPLITUDE
+                                        andShiftRatio:DEFAULT_ELASTIC_SHIFT_RATIO
                                               bounded:bounded];
 }
 
-+ (KeyframeParametricTimeBlock)elasticParametricTimeBlockWithEaseIn:(BOOL)easeIn
-                                                             period:(double)period
-                                                          amplitude:(double)amplitude
-                                                      andShiftRatio:(double)shiftRatio
++ (ParametricTimeBlock)elasticParametricTimeBlockWithEaseIn:(BOOL)easeIn
+                                                     period:(double)period
+                                                  amplitude:(double)amplitude
+                                              andShiftRatio:(double)shiftRatio
 {
     return [self elasticParametricTimeBlockWithEaseIn:easeIn
                                                period:period
@@ -365,13 +373,13 @@ const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockElasticO
                                               bounded:NO];
 }
 
-+ (KeyframeParametricTimeBlock)elasticParametricTimeBlockWithEaseIn:(BOOL)easeIn
-                                                             period:(double)period
-                                                          amplitude:(double)amplitude
-                                                      andShiftRatio:(double)shiftRatio
-                                                            bounded:(BOOL)bounded
++ (ParametricTimeBlock)elasticParametricTimeBlockWithEaseIn:(BOOL)easeIn
+                                                     period:(double)period
+                                                  amplitude:(double)amplitude
+                                              andShiftRatio:(double)shiftRatio
+                                                    bounded:(BOOL)bounded
 {
-    KeyframeParametricTimeBlock elasticBlock =
+    ParametricTimeBlock elasticBlock =
     ^(double time) {
         if (time <= 0) return 0.0;
         if (time >= 1) return 1.0;
@@ -390,8 +398,10 @@ const KeyframeParametricTimeBlock CAKeyframeAnimationParametricTimeBlockElasticO
     return [elasticBlock copy];
 }
 
-#pragma mark - Value blocks
-const KeyframeParametricValueBlock CAKeyframeAnimationParametricValueBlockDouble =
+
+#pragma mark - value blocks
+
+const ParametricValueBlock kParametricValueBlockDouble =
 ^(double progress, id fromValue, id toValue) {
     NSValue *value;
     double from, to;
@@ -401,7 +411,7 @@ const KeyframeParametricValueBlock CAKeyframeAnimationParametricValueBlockDouble
     return value;
 };
 
-const KeyframeParametricValueBlock CAKeyframeAnimationParametricValueBlockPoint =
+const ParametricValueBlock kParametricValueBlockPoint =
 ^(double progress, id fromValue, id toValue) {
     NSValue *value;
     CGPoint from, to;
@@ -412,26 +422,7 @@ const KeyframeParametricValueBlock CAKeyframeAnimationParametricValueBlockPoint 
     return value;
 };
 
-const KeyframeParametricValueBlock arcValueBlock(CGFloat radius, CGPoint center)
-{
-    const KeyframeParametricValueBlock arcAnimationHelperBlock =
-    ^(double progress, NSValue *fromAngle, NSValue *toAngle) {
-        NSValue *value;
-        CGFloat start, end;
-        [fromAngle getValue:&start];
-        [toAngle getValue:&end];
-
-        CGFloat angle = start + progress * (end - start);
-        value = [NSValue valueWithCGPoint:CGPointMake(center.x + radius * sinf(angle),
-                                                      center.y + radius * cosf(angle))];
-
-        return value;
-    };
-
-    return [arcAnimationHelperBlock copy];
-}
-
-const KeyframeParametricValueBlock CAKeyframeAnimationParametricValueBlockSize =
+const ParametricValueBlock kParametricValueBlockSize =
 ^(double progress, id fromValue, id toValue) {
     NSValue *value;
     CGSize from, to;
@@ -442,7 +433,7 @@ const KeyframeParametricValueBlock CAKeyframeAnimationParametricValueBlockSize =
     return value;
 };
 
-const KeyframeParametricValueBlock CAKeyframeAnimationParametricValueBlockRect =
+const ParametricValueBlock kParametricValueBlockRect =
 ^(double progress, id fromValue, id toValue) {
     NSValue *value;
     CGRect from, to;
@@ -456,14 +447,14 @@ const KeyframeParametricValueBlock CAKeyframeAnimationParametricValueBlockRect =
 
     CGPoint origin;
     CGSize size;
-    [CAKeyframeAnimationParametricValueBlockPoint(progress, fromOrigin, toOrigin) getValue:&origin];
-    [CAKeyframeAnimationParametricValueBlockSize(progress, fromSize, toSize) getValue:&size];
+    [kParametricValueBlockPoint(progress, fromOrigin, toOrigin) getValue:&origin];
+    [kParametricValueBlockSize(progress, fromSize, toSize) getValue:&size];
 
     value = [NSValue valueWithCGRect:CGRectMake(origin.x, origin.y, size.width, size.height)];
     return value;
 };
 
-const KeyframeParametricValueBlock CAKeyframeAnimationParametricValueBlockColor =
+const ParametricValueBlock kParametricValueBlockColor =
 ^(double progress, id fromValue, id toValue) {
     id value = nil;
     CGColorRef from = (__bridge CGColorRef)fromValue;
@@ -487,5 +478,25 @@ const KeyframeParametricValueBlock CAKeyframeAnimationParametricValueBlockColor 
                                 alpha:a].CGColor;
     return value;
 };
+
++ (ParametricValueBlock)arcPathParametricValueBlockWithRadius:(CGFloat)radius
+                                                    andCenter:(CGPoint)center
+{
+    const ParametricValueBlock arcAnimationHelperBlock =
+    ^(double progress, id fromAngle, id toAngle) {
+        NSValue *value;
+        CGFloat start, end;
+        [fromAngle getValue:&start];
+        [toAngle getValue:&end];
+
+        CGFloat angle = start + progress * (end - start);
+        value = [NSValue valueWithCGPoint:CGPointMake(center.x + radius * sinf(angle),
+                                                      center.y + radius * cosf(angle))];
+
+        return value;
+    };
+
+    return [arcAnimationHelperBlock copy];
+}
 
 @end
