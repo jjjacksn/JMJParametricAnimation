@@ -1,4 +1,4 @@
-CAKeyframeAnimation-Parametric
+ParametricAnimations
 ==============================
 
-Parametric Keyframe Animations!
+Parametric Animations! You can use this to create animations with parametric time functions.
