@@ -22,6 +22,7 @@ typedef enum AnimationPreview {
     kAnimationPreviewCubicInOut,
     kAnimationPreviewCircularIn,
     kAnimationPreviewCircularOut,
+    kAnimationPreviewCircularInOut,
     kAnimationPreviewExpoIn,
     kAnimationPreviewExpoOut,
     kAnimationPreviewExpoInOut,
@@ -29,8 +30,7 @@ typedef enum AnimationPreview {
     kAnimationPreviewElasticOut,
     kAnimationPreviewSineIn,
     kAnimationPreviewSineOut,
-    kAnimationPreviewSineInOut,
-    kAnimationPreviewSquashedSineInOut,
+    kAnimationPreviewSineInOut
 } AnimationPreview;
 
 @implementation ViewController
@@ -55,6 +55,7 @@ typedef enum AnimationPreview {
                                 @(kAnimationPreviewCubicInOut),
                                 @(kAnimationPreviewCircularIn),
                                 @(kAnimationPreviewCircularOut),
+                                @(kAnimationPreviewCircularInOut),
                                 @(kAnimationPreviewExpoIn),
                                 @(kAnimationPreviewExpoOut),
                                 @(kAnimationPreviewExpoInOut),
@@ -62,8 +63,7 @@ typedef enum AnimationPreview {
                                 @(kAnimationPreviewElasticOut),
                                 @(kAnimationPreviewSineIn),
                                 @(kAnimationPreviewSineOut),
-                                @(kAnimationPreviewSineInOut),
-                                @(kAnimationPreviewSquashedSineInOut) ];
+                                @(kAnimationPreviewSineInOut) ];
 }
 
 - (void)didReceiveMemoryWarning
@@ -160,6 +160,10 @@ typedef enum AnimationPreview {
             timeFxn = kParametricTimeBlockCircularOut;
             title = @"Circular Out";
             break;
+        case kAnimationPreviewCircularInOut:
+            timeFxn = kParametricTimeBlockCircularInOut;
+            title = @"Circular In-Out";
+            break;
         case kAnimationPreviewExpoIn:
             timeFxn = kParametricTimeBlockExpoIn;
             title = @"Expo In";
@@ -192,9 +196,6 @@ typedef enum AnimationPreview {
             timeFxn = kParametricTimeBlockSineInOut;
             title = @"Sine In-Out";
             break;
-        case kAnimationPreviewSquashedSineInOut: 
-            timeFxn = kParametricTimeBlockSquashedSineInOut;
-            title = @"Sq. Sine In-Out";
             break;
         default:
             break;

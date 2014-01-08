@@ -88,7 +88,6 @@ extern const ParametricTimeBlock kParametricTimeBlockElasticOut;
 extern const ParametricTimeBlock kParametricTimeBlockSineIn;
 extern const ParametricTimeBlock kParametricTimeBlockSineOut;
 extern const ParametricTimeBlock kParametricTimeBlockSineInOut;
-extern const ParametricTimeBlock kParametricTimeBlockSquashedSineInOut;
 
 
 #pragma mark - value blocks

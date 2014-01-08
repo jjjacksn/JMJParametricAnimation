@@ -4,7 +4,6 @@
 
 
 #pragma mark - bezier helpers
-
 double bezier(double time, double A, double B, double C)
 {
     return time * (C + time * (B + time * A)); //A t^3 + B t^2 + C t
@@ -46,7 +45,6 @@ const double (^bezierEvaluator)(double, CGPoint, CGPoint) = ^(double time, CGPoi
 
 
 #pragma mark - time blocks
-
 const ParametricTimeBlock kParametricTimeBlockLinear =
 ^(double time) {
     return time;
@@ -104,18 +102,18 @@ const ParametricTimeBlock kParametricTimeBlockCubicIn =
 
 const ParametricTimeBlock kParametricTimeBlockCubicOut =
 ^(double time) {
-    return pow(time, 3);
+    return 1 - pow(1 - time, 3);
 };
 
 const ParametricTimeBlock kParametricTimeBlockCubicInOut =
 ^(double time) {
     time *= 2.0;
-  if (time < 1) {
+    if (time < 1) {
         return 0.5 * pow(time, 3);
     }
 
-  time -= 2;
-  return 0.5 * pow(time, 3) + 1;
+    time -= 2;
+    return 0.5 * pow(time, 3) + 1;
 };
 
 const ParametricTimeBlock kParametricTimeBlockExpoIn =
@@ -158,19 +156,27 @@ const ParametricTimeBlock kParametricTimeBlockCircularOut =
     return sqrt(1 - pow(time - 1, 2));
 };
 
+const ParametricTimeBlock kParametricTimeBlockCircularInOut =
+^(double time) {
+    time *= 2;
+    if (time < 1) return -0.5 * (sqrt(1 - pow(time, 2)) - 1);
+    time -= 2;
+    return 0.5 * (sqrt(1 - pow(time, 2)) + 1);
+};
+
 const ParametricTimeBlock kParametricTimeBlockSineIn =
 ^(double time) {
-    return -cos(time * M_PI / 2) + 1;
+    return -cos(time * M_PI_2) + 1;
 };
 
 const ParametricTimeBlock kParametricTimeBlockSineOut =
 ^(double time) {
-    return -cos(time * M_PI / 2) + 1;
+    return sin(time * M_PI_2);
 };
 
 const ParametricTimeBlock kParametricTimeBlockSineInOut =
 ^(double time) {
-    return -0.5 * cos(time * M_PI) + 0.5;
+    return -0.5 * (cos(time * M_PI) - 1);
 };
 
 const ParametricTimeBlock kParametricTimeBlockSquashedSineInOut =
@@ -270,7 +276,6 @@ const ParametricTimeBlock kParametricTimeBlockElasticOut =
 
 
 #pragma mark - value blocks
-
 const ParametricValueBlock kParametricValueBlockDouble =
 ^(double progress, id fromValue, id toValue) {
     NSValue *value;
