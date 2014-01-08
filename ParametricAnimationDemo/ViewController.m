@@ -30,7 +30,8 @@ typedef enum AnimationPreview {
     kAnimationPreviewElasticOut,
     kAnimationPreviewSineIn,
     kAnimationPreviewSineOut,
-    kAnimationPreviewSineInOut
+    kAnimationPreviewSineInOut,
+    kAnimationBackInExpoOut
 } AnimationPreview;
 
 @implementation ViewController
@@ -63,7 +64,8 @@ typedef enum AnimationPreview {
                                 @(kAnimationPreviewElasticOut),
                                 @(kAnimationPreviewSineIn),
                                 @(kAnimationPreviewSineOut),
-                                @(kAnimationPreviewSineInOut) ];
+                                @(kAnimationPreviewSineInOut),
+                                @(kAnimationBackInExpoOut) ];
 }
 
 - (void)didReceiveMemoryWarning
@@ -196,6 +198,13 @@ typedef enum AnimationPreview {
             timeFxn = kParametricTimeBlockSineInOut;
             title = @"Sine In-Out";
             break;
+        case kAnimationBackInExpoOut:
+            timeFxn = ^(double time) {
+                if (time < 0.5) return kParametricTimeBlockBackIn(time * 2) / 2;
+                time -= 0.5;
+                return (kParametricTimeBlockBackIn(1.0) + kParametricTimeBlockExpoOut(time)) / 2;
+            };
+            title = @"Back In Expo Out";
             break;
         default:
             break;
