@@ -4,16 +4,17 @@
 #pragma mark - types
 /**
  * A block representing a parametric easing function that takes normalized time as input and returns the
- * normalized progress from. See www.easings.net for visualizations of most of the blocks listed here.
+ * normalized progress from. Run the demo to see visualizations of the blocks available.
  *
  * @param time A value from 0 to 1 representing the progress between start time and finish time.
  *
- * @return A value from representing the progress between start value and finish value for the given time. This value may be outside the range of [0, 1].
+ * @return A value from representing the progress between start value and finish value for the given time.
+ * This value may be outside the range of [0, 1].
  */
 typedef double (^ParametricTimeBlock)(double time);
 
 /**
- * A block that linearly interpolates between two value objects.
+ * A block that interpolates between two value objects.
  *
  * @param progress A value from 0 to 1 representing the progress between desired start and end
  * values.
@@ -114,5 +115,14 @@ extern const ParametricValueBlock kParametricValueBlockColor;
  */
 + (ParametricValueBlock)arcPathParametricValueBlockWithRadius:(CGFloat)radius
                                                     andCenter:(CGPoint)center;
+
+
+#pragma mark - linear interpolation
+
+extern const double (^kParametricAnimationLerpDouble)(double progress, double from, double to);
+extern const CGPoint (^kParametricAnimationLerpPoint)(double progress, CGPoint from, CGPoint to);
+extern const CGSize (^kParametricAnimationLerpSize)(double progress, CGSize from, CGSize to);
+extern const CGRect (^kParametricAnimationLerpRect)(double progress, CGRect from, CGRect to);
+extern const CGColorRef (^kParametricAnimationLerpColor)(double progress, CGColorRef from, CGColorRef to);
 
 @end

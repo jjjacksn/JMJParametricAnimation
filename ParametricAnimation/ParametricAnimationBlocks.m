@@ -283,10 +283,8 @@ const ParametricTimeBlock kParametricTimeBlockElasticOut =
 const ParametricValueBlock kParametricValueBlockDouble =
 ^(double progress, id fromValue, id toValue) {
     NSValue *value;
-    double from, to;
-    [fromValue getValue:&from];
-    [toValue getValue:&to];
-    value = [NSNumber numberWithDouble:(from + (to - from) * progress)];
+    double from = [fromValue doubleValue], to = [toValue doubleValue];
+    value = [NSNumber numberWithDouble:kParametricAnimationLerpDouble(progress, from, to)];
     return value;
 };
 
@@ -296,8 +294,7 @@ const ParametricValueBlock kParametricValueBlockPoint =
     CGPoint from, to;
     [fromValue getValue:&from];
     [toValue getValue:&to];
-    value = [NSValue valueWithCGPoint:CGPointMake((from.x + (to.x - from.x) * progress),
-                                                  (from.y + (to.y - from.y) * progress))];
+    value = [NSValue valueWithCGPoint:kParametricAnimationLerpPoint(progress, from, to)];
     return value;
 };
 
@@ -307,8 +304,7 @@ const ParametricValueBlock kParametricValueBlockSize =
     CGSize from, to;
     [fromValue getValue:&from];
     [toValue getValue:&to];
-    value = [NSValue valueWithCGSize:CGSizeMake((from.width + (to.width - from.width) * progress),
-                                                (from.height + (to.height - from.height) * progress))];
+    value = [NSValue valueWithCGSize:kParametricAnimationLerpSize(progress, from, to)];
     return value;
 };
 
@@ -319,17 +315,7 @@ const ParametricValueBlock kParametricValueBlockRect =
     [fromValue getValue:&from];
     [toValue getValue:&to];
 
-    NSValue *fromOrigin = [NSValue valueWithCGPoint:from.origin];
-    NSValue *toOrigin = [NSValue valueWithCGPoint:to.origin];
-    NSValue *fromSize = [NSValue valueWithCGSize:from.size];
-    NSValue *toSize = [NSValue valueWithCGSize:to.size];
-
-    CGPoint origin;
-    CGSize size;
-    [kParametricValueBlockPoint(progress, fromOrigin, toOrigin) getValue:&origin];
-    [kParametricValueBlockSize(progress, fromSize, toSize) getValue:&size];
-
-    value = [NSValue valueWithCGRect:CGRectMake(origin.x, origin.y, size.width, size.height)];
+    value = [NSValue valueWithCGRect:kParametricAnimationLerpRect(progress, from, to)];
     return value;
 };
 
@@ -339,22 +325,7 @@ const ParametricValueBlock kParametricValueBlockColor =
     CGColorRef from = (__bridge CGColorRef)fromValue;
     CGColorRef to = (__bridge CGColorRef)toValue;
 
-    const CGFloat *fromComponents = CGColorGetComponents(from);
-    const CGFloat *toComponents = CGColorGetComponents(to);
-
-    CGFloat fromAlpha, toAlpha, r, g, b, a;
-    fromAlpha = CGColorGetAlpha(from);
-    toAlpha = CGColorGetAlpha(to);
-
-    r = fromComponents[0] + (toComponents[0] - fromComponents[0]) * progress;
-    g = fromComponents[1] + (toComponents[1] - fromComponents[1]) * progress;
-    b = fromComponents[2] + (toComponents[2] - fromComponents[2]) * progress;
-    a = fromAlpha + (toAlpha - fromAlpha) * progress;
-
-    value = (id)[UIColor colorWithRed:r
-                                green:g
-                                 blue:b
-                                alpha:a].CGColor;
+    value = (__bridge id)kParametricAnimationLerpColor(progress, from, to);
     return value;
 };
 
@@ -377,5 +348,56 @@ const ParametricValueBlock kParametricValueBlockColor =
 
     return [arcAnimationHelperBlock copy];
 }
+
+
+#pragma mark - linear interpolation
+
+const double (^kParametricAnimationLerpDouble)(double progress, double from, double to) =
+^(double progress, double from, double to) {
+    return from + (to - from) * progress;
+};
+
+const CGPoint (^kParametricAnimationLerpPoint)(double progress, CGPoint from, CGPoint to) =
+^(double progress, CGPoint from, CGPoint to) {
+    return CGPointMake(kParametricAnimationLerpDouble(progress, from.x, to.x),
+                       kParametricAnimationLerpDouble(progress, from.y, to.y));
+};
+
+const CGSize (^kParametricAnimationLerpSize)(double progress, CGSize from, CGSize to) =
+^(double progress, CGSize from, CGSize to) {
+    return CGSizeMake(kParametricAnimationLerpDouble(progress, from.width, to.width),
+                      kParametricAnimationLerpDouble(progress, from.height, to.height));
+};
+
+const CGRect (^kParametricAnimationLerpRect)(double progress, CGRect from, CGRect to) =
+^(double progress, CGRect from, CGRect to) {
+    return CGRectMake(kParametricAnimationLerpDouble(progress, from.origin.x, to.origin.x),
+                      kParametricAnimationLerpDouble(progress, from.origin.y, to.origin.y),
+                      kParametricAnimationLerpDouble(progress, from.size.width, to.size.width),
+                      kParametricAnimationLerpDouble(progress, from.size.height, to.size.height));
+};
+
+const CGColorRef (^kParametricAnimationLerpColor)(double progress, CGColorRef from, CGColorRef to) =
+^(double progress, CGColorRef from, CGColorRef to) {
+    CGColorRef value = nil;
+
+    const CGFloat *fromComponents = CGColorGetComponents(from);
+    const CGFloat *toComponents = CGColorGetComponents(to);
+
+    CGFloat fromAlpha, toAlpha, r, g, b, a;
+    fromAlpha = CGColorGetAlpha(from);
+    toAlpha = CGColorGetAlpha(to);
+
+    r = kParametricAnimationLerpDouble(progress, fromComponents[0], toComponents[0]);
+    g = kParametricAnimationLerpDouble(progress, fromComponents[1], toComponents[1]);
+    b = kParametricAnimationLerpDouble(progress, fromComponents[2], toComponents[2]);
+    a = kParametricAnimationLerpDouble(progress, fromAlpha, toAlpha);
+
+    value = [UIColor colorWithRed:r
+                            green:g
+                             blue:b
+                            alpha:a].CGColor;
+    return value;
+};
 
 @end
