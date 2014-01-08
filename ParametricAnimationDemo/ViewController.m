@@ -53,7 +53,7 @@ typedef enum AnimationPreview {
                                 @(kAnimationPreviewCubicIn),
                                 @(kAnimationPreviewCubicOut),
                                 @(kAnimationPreviewCubicInOut),
-//                                @(kAnimationPreviewCircularIn),
+                                @(kAnimationPreviewCircularIn),
                                 @(kAnimationPreviewCircularOut),
                                 @(kAnimationPreviewExpoIn),
                                 @(kAnimationPreviewExpoOut),

@@ -103,7 +103,7 @@
     double time = 0.0;
     double timeStep = 1.0 / (double)(numSteps - 1);
     for (NSUInteger i = 0; i < numSteps; i++) {
-        NSValue *value = valueFxn(timeFxn(time), fromValue, toValue);
+        NSValue *value = valueFxn(timeFxn(MIN(1, MAX(0, time))), fromValue, toValue);
         [values addObject:value];
         time += timeStep;
     }
