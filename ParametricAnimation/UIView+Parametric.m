@@ -122,8 +122,6 @@
         double x = kParametricAnimationLerpDouble(xTimeFxn(time), fromValue.x, toValue.x);
         double y = kParametricAnimationLerpDouble(yTimeFxn(time), fromValue.y, toValue.y);
 
-
-        NSLog(@"time: %g", time);
         CGPoint value = CGPointMake(x, y);
         [object setValue:[NSValue valueWithCGPoint:value]
               forKeyPath:path];
