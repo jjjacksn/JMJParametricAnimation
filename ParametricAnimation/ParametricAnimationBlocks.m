@@ -3,6 +3,10 @@
 @implementation ParametricAnimationBlocks
 
 
+#pragma mark - constants
+const NSInteger kParametricAnimationNumSteps = 101;
+
+
 #pragma mark - bezier helpers
 double bezier(double time, double A, double B, double C)
 {

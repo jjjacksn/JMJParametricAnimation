@@ -1,7 +1,5 @@
 #import "CAKeyframeAnimation+Parametric.h"
 
-#define DEFAULT_NUM_STEPS 101
-
 @implementation CAKeyframeAnimation (Parametric)
 
 
@@ -86,7 +84,7 @@
                                                                       valueFxn:valueFxn
                                                                      fromValue:fromValue
                                                                        toValue:toValue
-                                                                       inSteps:DEFAULT_NUM_STEPS];
+                                                                       inSteps:kParametricAnimationNumSteps];
     return animation;
 }
 
@@ -100,17 +98,18 @@
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:path];
 
     NSMutableArray *values = [NSMutableArray arrayWithCapacity:numSteps];
+
     double time = 0.0;
     double timeStep = 1.0 / (double)(numSteps - 1);
     for (NSUInteger i = 0; i < numSteps; i++) {
-        NSValue *value = valueFxn(timeFxn(MIN(1, MAX(0, time))), fromValue, toValue);
+        NSValue *value = valueFxn(timeFxn(time), fromValue, toValue);
         [values addObject:value];
-        time += timeStep;
+        time = MIN(1, MAX(0, time + timeStep));
     }
 
     animation.calculationMode = kCAAnimationLinear;
     [animation setValues:values];
-    return(animation);
+    return animation;
 }
 
 + (id)animationWithAnimations:(NSArray *)animations

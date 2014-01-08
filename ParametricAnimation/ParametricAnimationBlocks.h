@@ -30,6 +30,10 @@ typedef id (^ParametricValueBlock)(double progress,
                                    id toValue);
 
 
+#pragma mark - constants
+extern const NSInteger kParametricAnimationNumSteps;
+
+
 @interface ParametricAnimationBlocks : NSObject
 
 
