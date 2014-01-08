@@ -68,12 +68,10 @@ typedef enum AnimationPreview {
                                 @(kAnimationBackInExpoOut) ];
 }
 
-- (void)didReceiveMemoryWarning
+- (IBAction)animationModeDidChange:(id)sender
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self.collectionView reloadData];
 }
-
 
 #pragma mark - UICollectionView Datasource
 - (NSInteger)collectionView:(UICollectionView *)view
@@ -209,7 +207,7 @@ typedef enum AnimationPreview {
         default:
             break;
     }
-    cell.implicit = self.animationModeSelector.selectedSegmentIndex == 0;
+    cell.useCoreAnimation = self.animationModeSelector.selectedSegmentIndex != 0;
     cell.titleLabel.text = title;
     cell.timeFxn = timeFxn;
 }

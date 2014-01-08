@@ -30,6 +30,14 @@ typedef id (^ParametricValueBlock)(double progress,
                                    id fromValue,
                                    id toValue);
 
+/**
+ * A block that sets animated properties given the time. This block usually leverages parametric time blocks
+ * and value blocks above.
+ *
+ * @param time A value from 0 to 1 representing the progress between start time and finish time.
+ */
+typedef void (^ParametricAnimationBlock)(double time);
+
 
 #pragma mark - constants
 extern const NSInteger kParametricAnimationNumSteps;

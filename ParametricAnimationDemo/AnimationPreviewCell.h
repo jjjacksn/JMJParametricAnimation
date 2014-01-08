@@ -7,7 +7,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
-@property (nonatomic, assign) BOOL implicit;
+@property (nonatomic, assign) BOOL useCoreAnimation;
 @property (nonatomic, copy) ParametricTimeBlock timeFxn;
 
 - (void)animateDot;
