@@ -59,6 +59,7 @@ extern const ParametricTimeBlock kParametricTimeBlockBackInOut;
 
 extern const ParametricTimeBlock kParametricTimeBlockQuadraticIn;
 extern const ParametricTimeBlock kParametricTimeBlockQuadraticOut;
+extern const ParametricTimeBlock kParametricTimeBlockQuadraticInOut;
 
 extern const ParametricTimeBlock kParametricTimeBlockCubicIn;
 extern const ParametricTimeBlock kParametricTimeBlockCubicOut;
@@ -71,6 +72,14 @@ extern const ParametricTimeBlock kParametricTimeBlockCircularInOut;
 extern const ParametricTimeBlock kParametricTimeBlockExpoIn;
 extern const ParametricTimeBlock kParametricTimeBlockExpoOut;
 extern const ParametricTimeBlock kParametricTimeBlockExpoInOut;
+
+extern const ParametricTimeBlock kParametricTimeBlockSineIn;
+extern const ParametricTimeBlock kParametricTimeBlockSineOut;
+extern const ParametricTimeBlock kParametricTimeBlockSineInOut;
+
+extern const ParametricTimeBlock kParametricTimeBlockBounceIn;
+extern const ParametricTimeBlock kParametricTimeBlockBounceOut;
+extern const ParametricTimeBlock kParametricTimeBlockBounceInOut;
 
 extern const ParametricTimeBlock kParametricTimeBlockElasticIn;
 extern const ParametricTimeBlock kParametricTimeBlockElasticOut;
@@ -97,12 +106,6 @@ extern const ParametricTimeBlock kParametricTimeBlockElasticOut;
                                                      period:(double)period
                                                   amplitude:(double)amplitude
                                               andShiftRatio:(double)shiftRatio;
-
-extern const ParametricTimeBlock kParametricTimeBlockSineIn;
-extern const ParametricTimeBlock kParametricTimeBlockSineOut;
-extern const ParametricTimeBlock kParametricTimeBlockSineInOut;
-
-
 #pragma mark - value blocks
 extern const ParametricValueBlock kParametricValueBlockDouble;
 extern const ParametricValueBlock kParametricValueBlockPoint;
@@ -123,6 +126,10 @@ extern const ParametricValueBlock kParametricValueBlockColor;
  */
 + (ParametricValueBlock)arcPathParametricValueBlockWithRadius:(CGFloat)radius
                                                     andCenter:(CGPoint)center;
+
+
+#pragma mark - bezier curves
+extern const double (^kParametricBezierEvaluator)(double time, CGPoint ct1, CGPoint ct2);
 
 
 #pragma mark - linear interpolation

@@ -17,6 +17,7 @@ typedef enum AnimationPreview {
     kAnimationPreviewBackInOut,
     kAnimationPreviewQuadraticIn,
     kAnimationPreviewQuadraticOut,
+    kAnimationPreviewQuadraticInOut,
     kAnimationPreviewCubicIn,
     kAnimationPreviewCubicOut,
     kAnimationPreviewCubicInOut,
@@ -26,12 +27,15 @@ typedef enum AnimationPreview {
     kAnimationPreviewExpoIn,
     kAnimationPreviewExpoOut,
     kAnimationPreviewExpoInOut,
-    kAnimationPreviewElasticIn,
-    kAnimationPreviewElasticOut,
     kAnimationPreviewSineIn,
     kAnimationPreviewSineOut,
     kAnimationPreviewSineInOut,
-    kAnimationBackInExpoOut
+    kAnimationPreviewBounceIn,
+    kAnimationPreviewBounceOut,
+    kAnimationPreviewBounceInOut,
+    kAnimationPreviewElasticIn,
+    kAnimationPreviewElasticOut,
+    kAnimationPreviewBackInExpoOut
 } AnimationPreview;
 
 @implementation ViewController
@@ -51,6 +55,7 @@ typedef enum AnimationPreview {
                                 @(kAnimationPreviewBackInOut),
                                 @(kAnimationPreviewQuadraticIn),
                                 @(kAnimationPreviewQuadraticOut),
+                                @(kAnimationPreviewQuadraticInOut),
                                 @(kAnimationPreviewCubicIn),
                                 @(kAnimationPreviewCubicOut),
                                 @(kAnimationPreviewCubicInOut),
@@ -60,12 +65,15 @@ typedef enum AnimationPreview {
                                 @(kAnimationPreviewExpoIn),
                                 @(kAnimationPreviewExpoOut),
                                 @(kAnimationPreviewExpoInOut),
-                                @(kAnimationPreviewElasticIn),
-                                @(kAnimationPreviewElasticOut),
                                 @(kAnimationPreviewSineIn),
                                 @(kAnimationPreviewSineOut),
                                 @(kAnimationPreviewSineInOut),
-                                @(kAnimationBackInExpoOut) ];
+                                @(kAnimationPreviewBounceIn),
+                                @(kAnimationPreviewBounceOut),
+                                @(kAnimationPreviewBounceInOut),
+                                @(kAnimationPreviewElasticIn),
+                                @(kAnimationPreviewElasticOut),
+                                @(kAnimationPreviewBackInExpoOut) ];
 }
 
 - (IBAction)animationModeDidChange:(id)sender
@@ -140,6 +148,10 @@ typedef enum AnimationPreview {
             timeFxn = kParametricTimeBlockQuadraticOut;
             title = @"Quadratic Out";
             break;
+        case kAnimationPreviewQuadraticInOut:
+            timeFxn = kParametricTimeBlockQuadraticInOut;
+            title = @"Quadratic In-Out";
+            break;
         case kAnimationPreviewCubicIn:
             timeFxn = kParametricTimeBlockCubicIn;
             title = @"Cubic In";
@@ -176,15 +188,7 @@ typedef enum AnimationPreview {
             timeFxn = kParametricTimeBlockExpoInOut;
             title = @"Expo In-Out";
             break;
-        case kAnimationPreviewElasticIn:
-            timeFxn = kParametricTimeBlockElasticIn;
-            title = @"Elastic In";
-            break;
-        case kAnimationPreviewElasticOut:
-            timeFxn = kParametricTimeBlockElasticOut;
-            title = @"Elastic Out";
-            break;
-        case kAnimationPreviewSineIn: 
+        case kAnimationPreviewSineIn:
             timeFxn = kParametricTimeBlockSineIn;
             title = @"Sine In";
             break;
@@ -196,11 +200,31 @@ typedef enum AnimationPreview {
             timeFxn = kParametricTimeBlockSineInOut;
             title = @"Sine In-Out";
             break;
-        case kAnimationBackInExpoOut:
+        case kAnimationPreviewBounceIn:
+            timeFxn = kParametricTimeBlockBounceIn;
+            title = @"Bounce In";
+            break;
+        case kAnimationPreviewBounceOut:
+            timeFxn = kParametricTimeBlockBounceOut;
+            title = @"Bounce Out";
+            break;
+        case kAnimationPreviewBounceInOut:
+            timeFxn = kParametricTimeBlockBounceInOut;
+            title = @"Bounce In-Out";
+            break;
+        case kAnimationPreviewElasticIn:
+            timeFxn = kParametricTimeBlockElasticIn;
+            title = @"Elastic In";
+            break;
+        case kAnimationPreviewElasticOut:
+            timeFxn = kParametricTimeBlockElasticOut;
+            title = @"Elastic Out";
+            break;
+        case kAnimationPreviewBackInExpoOut:
             timeFxn = ^(double time) {
                 if (time < 0.5) return kParametricTimeBlockBackIn(time * 2) / 2;
                 time -= 0.5;
-                return (kParametricTimeBlockBackIn(1.0) + kParametricTimeBlockExpoOut(time)) / 2;
+                return (kParametricTimeBlockBackIn(1.0) + kParametricTimeBlockExpoOut(time * 2)) / 2;
             };
             title = @"Back In Expo Out";
             break;

@@ -7,7 +7,7 @@
 const NSInteger kParametricAnimationNumSteps = 101;
 
 
-#pragma mark - bezier helpers
+#pragma mark - bezier
 double bezier(double time, double A, double B, double C)
 {
     return time * (C + time * (B + time * A)); //A t^3 + B t^2 + C t
@@ -38,8 +38,8 @@ double xForTime(double time, double ctx1, double ctx2)
     return x;
 }
 
-const double (^bezierEvaluator)(double, CGPoint, CGPoint) = ^(double time, CGPoint ct1, CGPoint ct2)
-{
+const double (^kParametricBezierEvaluator)(double, CGPoint, CGPoint) =
+^(double time, CGPoint ct1, CGPoint ct2) {
     double Cy = 3 * ct1.y;
     double By = 3 * (ct2.y - ct1.y) - Cy;
     double Ay = 1 - Cy - By;
@@ -57,36 +57,36 @@ const ParametricTimeBlock kParametricTimeBlockLinear =
 const ParametricTimeBlock kParametricTimeBlockAppleIn =
 ^(double time) {
     CGPoint ct1 = CGPointMake(0.42, 0.0), ct2 = CGPointMake(1.0, 1.0);
-    return bezierEvaluator(time, ct1, ct2);
+    return kParametricBezierEvaluator(time, ct1, ct2);
 };
 const ParametricTimeBlock kParametricTimeBlockAppleOut =
 ^(double time) {
     CGPoint ct1 = CGPointMake(0.0, 0.0), ct2 = CGPointMake(0.58, 1.0);
-    return bezierEvaluator(time, ct1, ct2);
+    return kParametricBezierEvaluator(time, ct1, ct2);
 };
 
 const ParametricTimeBlock kParametricTimeBlockAppleInOut =
 ^(double time) {
     CGPoint ct1 = CGPointMake(0.42, 0.0), ct2 = CGPointMake(0.58, 1.0);
-    return bezierEvaluator(time, ct1, ct2);
+    return kParametricBezierEvaluator(time, ct1, ct2);
 };
 
 const ParametricTimeBlock kParametricTimeBlockBackIn =
 ^(double time) {
     CGPoint ct1 = CGPointMake(0.6, -0.28), ct2 = CGPointMake(0.735, 0.045);
-    return bezierEvaluator(time, ct1, ct2);
+    return kParametricBezierEvaluator(time, ct1, ct2);
 };
 
 const ParametricTimeBlock kParametricTimeBlockBackOut =
 ^(double time) {
     CGPoint ct1 = CGPointMake(0.175, 0.885), ct2 = CGPointMake(0.32, 1.275);
-    return bezierEvaluator(time, ct1, ct2);
+    return kParametricBezierEvaluator(time, ct1, ct2);
 };
 
 const ParametricTimeBlock kParametricTimeBlockBackInOut =
 ^(double time) {
     CGPoint ct1 = CGPointMake(0.68, -0.55), ct2 = CGPointMake(0.265, 1.55);
-    return bezierEvaluator(time, ct1, ct2);
+    return kParametricBezierEvaluator(time, ct1, ct2);
 };
 
 const ParametricTimeBlock kParametricTimeBlockQuadraticIn =
@@ -97,6 +97,14 @@ const ParametricTimeBlock kParametricTimeBlockQuadraticIn =
 const ParametricTimeBlock kParametricTimeBlockQuadraticOut =
 ^(double time) {
     return 1 - pow(1 - time, 2);
+};
+
+const ParametricTimeBlock kParametricTimeBlockQuadraticInOut =
+^(double time) {
+    time *= 2.0;
+    if (time < 1) return kParametricTimeBlockQuadraticIn(time) / 2.0;
+    time--;
+    return (1 + kParametricTimeBlockQuadraticOut(time)) / 2.0;
 };
 
 const ParametricTimeBlock kParametricTimeBlockCubicIn =
@@ -183,22 +191,43 @@ const ParametricTimeBlock kParametricTimeBlockSineInOut =
     return -0.5 * (cos(time * M_PI) - 1);
 };
 
-const ParametricTimeBlock kParametricTimeBlockSquashedSineInOut =
+const ParametricTimeBlock kParametricTimeBlockBounceIn =
 ^(double time) {
-    double squashFactor = 0.75;
-    return squashFactor * (-0.5 * cos(time * M_PI) + 0.5) + 0.5 * squashFactor;
+    return 1 - kParametricTimeBlockBounceOut(1 - time);
 };
 
-#define DEFAULT_ELASTIC_PERIOD 0.3
-#define DEFAULT_ELASTIC_AMPLITUDE 1.0
-#define DEFAULT_ELASTIC_SHIFT_RATIO 0.25
+const ParametricTimeBlock kParametricTimeBlockBounceOut =
+^(double time) {
+    if (time < (1 / 2.75)) {
+        return 7.5625 * pow(time, 2);
+    } else if (time < (2 / 2.75)) {
+        time -= 1.5 / 2.75;
+        return 7.5625 * pow(time, 2) + 0.75;
+    } else if (time < (2.5 / 2.75)) {
+        time -= 2.25 / 2.75;
+        return 7.5625 * pow(time, 2) + 0.9375;
+    } else {
+        time -= 2.625 / 2.75;
+        return 7.5625 * pow(time, 2) + 0.984375;
+    }
+};
+
+const ParametricTimeBlock kParametricTimeBlockBounceInOut =
+^(double time) {
+    if (time < 0.5) return kParametricTimeBlockBounceIn(time * 2) / 2.0;
+    return (1 + kParametricTimeBlockBounceOut(time * 2 - 1)) / 2.0;
+};
+
+static const CGFloat kElasticPeriod = 0.3;
+static const CGFloat kElasticAmplitude = 1.0;
+static const CGFloat kElasticShiftRatio = 0.25;
 const ParametricTimeBlock kParametricTimeBlockElasticIn =
 ^(double time) {
     if (time <= 0.0) return 0.0;
     if (time >= 1.0) return 1.0;
-    double period = DEFAULT_ELASTIC_PERIOD;
-    double amplitude = DEFAULT_ELASTIC_AMPLITUDE;
-    double shift = period * DEFAULT_ELASTIC_SHIFT_RATIO;
+    double period = kElasticPeriod;
+    double amplitude = kElasticAmplitude;
+    double shift = period * kElasticShiftRatio;
 
     double result = - amplitude * pow(2, 10 * (time - 1)) * // amplitude growth
     sin( (time - 1 - shift) * 2 * M_PI / period);
@@ -209,9 +238,9 @@ const ParametricTimeBlock kParametricTimeBlockElasticOut =
 ^(double time) {
     if (time <= 0.0) return 0.0;
     if (time >= 1.0) return 1.0;
-    double period = DEFAULT_ELASTIC_PERIOD;
-    double amplitude = DEFAULT_ELASTIC_AMPLITUDE;
-    double shift = period * DEFAULT_ELASTIC_SHIFT_RATIO;
+    double period = kElasticPeriod;
+    double amplitude = kElasticAmplitude;
+    double shift = period * kElasticShiftRatio;
 
     double result = amplitude * pow(2, -10 * time) * // amplitude decay
     sin( (time - shift) * 2 * M_PI / period) + 1;
@@ -226,7 +255,7 @@ const ParametricTimeBlock kParametricTimeBlockElasticOut =
     return [self elasticParametricTimeBlockWithEaseIn:easeIn
                                                period:period
                                             amplitude:amplitude
-                                        andShiftRatio:DEFAULT_ELASTIC_SHIFT_RATIO];
+                                        andShiftRatio:kElasticShiftRatio];
 }
 
 + (ParametricTimeBlock)elasticParametricTimeBlockWithEaseIn:(BOOL)easeIn
@@ -237,7 +266,7 @@ const ParametricTimeBlock kParametricTimeBlockElasticOut =
     return [self elasticParametricTimeBlockWithEaseIn:easeIn
                                                period:period
                                             amplitude:amplitude
-                                        andShiftRatio:DEFAULT_ELASTIC_SHIFT_RATIO
+                                        andShiftRatio:kElasticShiftRatio
                                               bounded:bounded];
 }
 
