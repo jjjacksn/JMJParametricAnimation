@@ -1,7 +1,5 @@
 #import <UIKit/UIKit.h>
-#import "JMJParametricAnimationBlocks.h"
-
-@class AnimationChartView;
+#import "JMJParametricAnimation.h"
 
 @interface AnimationPreviewCell : UICollectionViewCell
 

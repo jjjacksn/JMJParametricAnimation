@@ -1,8 +1,5 @@
 #import "AnimationPreviewCell.h"
 
-#import "CAKeyframeAnimation+JMJParametricAnimation.h"
-#import "UIView+JMJParametricAnimation.h"
-
 static const CGFloat kLeftPosition = 0.05;
 static const CGFloat kRightPosition = 0.95;
 static const CGFloat kTopPosition = 0.25;
