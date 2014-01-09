@@ -239,9 +239,12 @@
         }
     };
 
+    UIViewKeyframeAnimationOptions options = UIViewKeyframeAnimationOptionCalculationModeLinear;
+    options = options | UIViewAnimationOptionCurveLinear;
+
     [UIView animateKeyframesWithDuration:duration
                                    delay:delay
-                                 options:UIViewKeyframeAnimationOptionCalculationModeLinear
+                                 options:options
                               animations:addKeyFrames
                               completion:completion];
 }
