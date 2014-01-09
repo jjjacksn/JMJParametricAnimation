@@ -7,8 +7,10 @@ Several common time functions are provided but you can easily create your own fr
 
 Both CALayer (iOS 4 and later) and UIView (iOS 7 and later) animations are supported.
 
+Use the demo to get an idea of the provided curves.
+
 <p align="center" >
-  <img src="https://raw.github.com/jjackson26/ParametricAnimations/assets/JMJParametricAnimationDemo-screenshot.png" alt="JMJParametricAnimation" title="JMJParametricAnimation">
+  <img src="https://raw.github.com/jjackson26/ParametricAnimations/update_readme/assets/JMJParametricAnimationDemo-screenshot.png" alt="JMJParametricAnimation" title="JMJParametricAnimation">
 </p>
 
 The inspiration for this came from Matt Gallagher's post here: http://www.cocoawithlove.com/2008/09/parametric-acceleration-curves-in-core.html 
