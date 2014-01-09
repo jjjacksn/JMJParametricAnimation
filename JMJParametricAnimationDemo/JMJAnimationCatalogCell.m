@@ -50,6 +50,15 @@ static const CGFloat kBottomPosition = 0.75;
     return self;
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self setPathForLayer:self.startLine
+      toHorizontalLineAtY:self.startPoint.y];
+    [self setPathForLayer:self.endLine
+      toHorizontalLineAtY:self.endPoint.y];
+}
+
 - (void)initialize
 {
     self.layer.borderColor = [UIColor blackColor].CGColor;

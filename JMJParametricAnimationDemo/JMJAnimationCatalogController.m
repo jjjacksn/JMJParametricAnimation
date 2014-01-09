@@ -46,6 +46,8 @@ typedef enum AnimationPreview {
 {
     [super viewDidLoad];
 
+    [self addObservers];
+
     self.animationExamples = @[ @(kAnimationPreviewAppleIn),
                                 @(kAnimationPreviewAppleOut),
                                 @(kAnimationPreviewAppleInOut),
@@ -76,10 +78,39 @@ typedef enum AnimationPreview {
                                 @(kAnimationPreviewQuadraticInOut) ];
 }
 
+- (void)dealloc
+{
+    [self removeObservers];
+}
+
+
+#pragma mark - observers
+- (void)addObservers
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(deviceOrientationDidChange)
+                                                 name:UIDeviceOrientationDidChangeNotification
+                                               object:nil];
+}
+
+- (void)removeObservers
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIDeviceOrientationDidChangeNotification
+                                                  object:nil];
+}
+
+- (void)deviceOrientationDidChange
+{
+    [self.collectionView reloadData];
+}
+
+#pragma mark - actions
 - (IBAction)animationModeDidChange:(id)sender
 {
     [self.collectionView reloadData];
 }
+
 
 #pragma mark - UICollectionView Datasource
 - (NSInteger)collectionView:(UICollectionView *)view
@@ -224,7 +255,7 @@ typedef enum AnimationPreview {
             timeFxn = ^(double time) {
                 if (time < 0.5) return JMJParametricAnimationTimeBlockBackIn(time * 2) / 2;
                 time -= 0.5;
-                return (JMJParametricAnimationTimeBlockBackIn(1.0) + JMJParametricAnimationTimeBlockExpoOut(time * 2)) / 2;
+                return (1.0 + JMJParametricAnimationTimeBlockExpoOut(time * 2)) / 2;
             };
             title = @"Back In Expo Out";
             break;
@@ -254,25 +285,63 @@ didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 
 
 #pragma mark – UICollectionViewDelegateFlowLayout
+
+static const CGFloat kCellSizeIPadPortrait = 182;
+static const CGFloat kCellSizeIPadLandscape = 160;
+static const CGFloat kCellSizeIPhonePortrait = 148;
+static const CGFloat kCellSizeIPhoneLandscape = 132;
+
+static const CGFloat kMargins = 8;
+static const CGFloat kMarginsIPadLandscape = 12;
+
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(148, 148);
+    CGSize cellSize;
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation)) {
+            cellSize = CGSizeMake(kCellSizeIPadPortrait, kCellSizeIPadPortrait);
+        } else {
+            cellSize = CGSizeMake(kCellSizeIPadLandscape, kCellSizeIPadLandscape);
+        }
+    }
+    else {
+        // iphone
+        if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait) {
+            cellSize = CGSizeMake(kCellSizeIPhonePortrait, kCellSizeIPhonePortrait);
+        } else {
+            cellSize = CGSizeMake(kCellSizeIPhoneLandscape, kCellSizeIPhoneLandscape);
+        }
+    }
+
+    return cellSize;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
                         layout:(UICollectionViewLayout *)collectionViewLayout
         insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(8, 8, 8, 8);
+    CGFloat horizontalMargin = kMargins;
+    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)
+        && [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        horizontalMargin = kMarginsIPadLandscape;
+    }
+    return UIEdgeInsetsMake(kMargins, horizontalMargin, kMargins, horizontalMargin);
 }
 
 -                (CGFloat)collectionView:(UICollectionView *)collectionView
                                   layout:(UICollectionViewLayout *)collectionViewLayout
 minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 8;
+    return kMargins;
+}
+
+-           (CGFloat)collectionView:(UICollectionView *)collectionView
+                             layout:(UICollectionViewLayout *)collectionViewLayout
+minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return kMargins;
 }
 
 @end
