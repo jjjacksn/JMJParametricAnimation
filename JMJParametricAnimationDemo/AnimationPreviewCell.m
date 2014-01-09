@@ -55,6 +55,9 @@ static const CGFloat kBottomPosition = 0.75;
 
 - (void)initialize
 {
+    self.layer.borderColor = [UIColor blackColor].CGColor;
+    self.layer.borderWidth = 1.0;
+    self.layer.cornerRadius = 10;
     [self createChartLines];
     [self createProgressDot];
 }
@@ -93,8 +96,8 @@ static const CGFloat kBottomPosition = 0.75;
 
 - (void)createProgressDot
 {
-    self.progressDot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 5)];
-    self.progressDot.layer.cornerRadius = 2.5;
+    self.progressDot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 8)];
+    self.progressDot.layer.cornerRadius = 4;
     self.progressDot.backgroundColor = [UIColor greenColor];
     self.progressDot.center = self.startPoint;
 

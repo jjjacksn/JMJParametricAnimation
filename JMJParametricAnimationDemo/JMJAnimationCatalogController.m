@@ -46,34 +46,34 @@ typedef enum AnimationPreview {
 {
     [super viewDidLoad];
 
-    self.animationExamples = @[ @(kAnimationPreviewLinear),
-                                @(kAnimationPreviewAppleIn),
+    self.animationExamples = @[ @(kAnimationPreviewAppleIn),
                                 @(kAnimationPreviewAppleOut),
                                 @(kAnimationPreviewAppleInOut),
                                 @(kAnimationPreviewBackIn),
                                 @(kAnimationPreviewBackOut),
                                 @(kAnimationPreviewBackInOut),
-                                @(kAnimationPreviewQuadraticIn),
-                                @(kAnimationPreviewQuadraticOut),
-                                @(kAnimationPreviewQuadraticInOut),
-                                @(kAnimationPreviewCubicIn),
-                                @(kAnimationPreviewCubicOut),
-                                @(kAnimationPreviewCubicInOut),
-                                @(kAnimationPreviewCircularIn),
-                                @(kAnimationPreviewCircularOut),
-                                @(kAnimationPreviewCircularInOut),
-                                @(kAnimationPreviewExpoIn),
-                                @(kAnimationPreviewExpoOut),
-                                @(kAnimationPreviewExpoInOut),
-                                @(kAnimationPreviewSineIn),
-                                @(kAnimationPreviewSineOut),
-                                @(kAnimationPreviewSineInOut),
+                                @(kAnimationPreviewBackInExpoOut),
                                 @(kAnimationPreviewBounceIn),
                                 @(kAnimationPreviewBounceOut),
                                 @(kAnimationPreviewBounceInOut),
+                                @(kAnimationPreviewCircularIn),
+                                @(kAnimationPreviewCircularOut),
+                                @(kAnimationPreviewCircularInOut),
+                                @(kAnimationPreviewCubicIn),
+                                @(kAnimationPreviewCubicOut),
+                                @(kAnimationPreviewCubicInOut),
                                 @(kAnimationPreviewElasticIn),
                                 @(kAnimationPreviewElasticOut),
-                                @(kAnimationPreviewBackInExpoOut) ];
+                                @(kAnimationPreviewExpoIn),
+                                @(kAnimationPreviewExpoOut),
+                                @(kAnimationPreviewExpoInOut),
+                                @(kAnimationPreviewLinear),
+                                @(kAnimationPreviewSineIn),
+                                @(kAnimationPreviewSineOut),
+                                @(kAnimationPreviewSineInOut),
+                                @(kAnimationPreviewQuadraticIn),
+                                @(kAnimationPreviewQuadraticOut),
+                                @(kAnimationPreviewQuadraticInOut) ];
 }
 
 - (IBAction)animationModeDidChange:(id)sender
@@ -98,7 +98,7 @@ typedef enum AnimationPreview {
 {
     AnimationPreviewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER
                                                                forIndexPath:indexPath];
-    AnimationPreview animation = [self.animationExamples[indexPath.row] integerValue];
+    AnimationPreview animation = (AnimationPreview)[self.animationExamples[indexPath.row] integerValue];
     [self setupAnimationCell:cell
                 forAnimation:animation];
 
