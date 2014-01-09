@@ -102,13 +102,13 @@
 		281C0EAB187C578F00877D6E = {
 			isa = PBXGroup;
 			children = (
-				281C0EF1187C59FD00877D6E /* LICENSE */,
-				281C0EF2187C59FD00877D6E /* README.md */,
+				281C0EB6187C578F00877D6E /* Frameworks */,
 				281C0EF6187C5A0700877D6E /* JMJParametricAnimation */,
 				281C0EBD187C578F00877D6E /* JMJParametricAnimationDemo */,
 				281C0EDF187C578F00877D6E /* JMJParametricAnimationDemoTests */,
-				281C0EB6187C578F00877D6E /* Frameworks */,
+				281C0EF1187C59FD00877D6E /* LICENSE */,
 				281C0EB5187C578F00877D6E /* Products */,
+				281C0EF2187C59FD00877D6E /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,13 +136,13 @@
 		281C0EBD187C578F00877D6E /* JMJParametricAnimationDemo */ = {
 			isa = PBXGroup;
 			children = (
+				281C0ED2187C578F00877D6E /* Images.xcassets */,
 				281C0F03187C759700877D6E /* JMJAnimationCatalogCell.h */,
 				281C0F04187C759700877D6E /* JMJAnimationCatalogCell.m */,
-				281C0EC6187C578F00877D6E /* JMJParametricAnimationDemoAppDelegate.h */,
-				281C0EC7187C578F00877D6E /* JMJParametricAnimationDemoAppDelegate.m */,
-				281C0ED2187C578F00877D6E /* Images.xcassets */,
 				281C0EFD187C6B0500877D6E /* JMJAnimationCatalogController.h */,
 				281C0EFE187C6B0500877D6E /* JMJAnimationCatalogController.m */,
+				281C0EC6187C578F00877D6E /* JMJParametricAnimationDemoAppDelegate.h */,
+				281C0EC7187C578F00877D6E /* JMJParametricAnimationDemoAppDelegate.m */,
 				281C0EC9187C578F00877D6E /* Main.storyboard */,
 				281C0EBE187C578F00877D6E /* Supporting Files */,
 			);
@@ -153,9 +153,9 @@
 			isa = PBXGroup;
 			children = (
 				281C0EC0187C578F00877D6E /* InfoPlist.strings */,
-				281C0EC3187C578F00877D6E /* main.m */,
 				281C0EBF187C578F00877D6E /* JMJParametricAnimationDemo-Info.plist */,
 				281C0EC5187C578F00877D6E /* JMJParametricAnimationDemo-Prefix.pch */,
+				281C0EC3187C578F00877D6E /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -183,11 +183,11 @@
 			children = (
 				281C0EEF187C59FD00877D6E /* CAKeyframeAnimation+JMJParametricAnimation.h */,
 				281C0EF0187C59FD00877D6E /* CAKeyframeAnimation+JMJParametricAnimation.m */,
+				28A6A852187F05BA006FA913 /* JMJParametricAnimation.h */,
 				281C0F00187C6D0C00877D6E /* JMJParametricAnimationBlocks.h */,
 				281C0F01187C6D0C00877D6E /* JMJParametricAnimationBlocks.m */,
 				28808F2A187CDDAC008B6BFB /* UIView+JMJParametricAnimation.h */,
 				28808F2B187CDDAC008B6BFB /* UIView+JMJParametricAnimation.m */,
-				28A6A852187F05BA006FA913 /* JMJParametricAnimation.h */,
 			);
 			path = JMJParametricAnimation;
 			sourceTree = "<group>";

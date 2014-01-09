@@ -7,7 +7,7 @@ Several common time functions are provided but you can easily create your own fr
 
 Both CALayer (iOS 4 and later) and UIView (iOS 7 and later) animations are supported.
 
-Use the demo to get an idea of the provided curves.
+Use the demo to get a feel for the provided curves.
 
 <p align="center" >
   <img src="https://raw.github.com/jjackson26/ParametricAnimations/update_readme/assets/JMJParametricAnimationDemo-screenshot.png" alt="JMJParametricAnimation" title="JMJParametricAnimation">
