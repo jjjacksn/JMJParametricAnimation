@@ -7,6 +7,7 @@
 
 @interface UIView (JMJParametricAnimation)
 
+#if ( defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000 )
 
 #pragma mark - convenience methods
 
@@ -175,5 +176,7 @@
                                animations:(JMJParametricAnimationBlock)animations
                                completion:(void (^)(BOOL))completion
                                   inSteps:(NSUInteger)numSteps;
+
+#endif
 
 @end

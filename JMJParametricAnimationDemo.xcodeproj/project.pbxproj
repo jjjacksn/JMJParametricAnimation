@@ -71,6 +71,7 @@
 		28808F2A187CDDAC008B6BFB /* UIView+JMJParametricAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JMJParametricAnimation.h"; sourceTree = "<group>"; };
 		28808F2B187CDDAC008B6BFB /* UIView+JMJParametricAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JMJParametricAnimation.m"; sourceTree = "<group>"; };
 		28808F2D187CDE36008B6BFB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		28A6A852187F05BA006FA913 /* JMJParametricAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMJParametricAnimation.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +187,7 @@
 				281C0F01187C6D0C00877D6E /* JMJParametricAnimationBlocks.m */,
 				28808F2A187CDDAC008B6BFB /* UIView+JMJParametricAnimation.h */,
 				28808F2B187CDDAC008B6BFB /* UIView+JMJParametricAnimation.m */,
+				28A6A852187F05BA006FA913 /* JMJParametricAnimation.h */,
 			);
 			path = JMJParametricAnimation;
 			sourceTree = "<group>";

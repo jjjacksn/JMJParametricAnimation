@@ -2,6 +2,7 @@
 
 @implementation UIView (JMJParametricAnimation)
 
+#if ( defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000 )
 
 #pragma mark - convenience methods
 
@@ -244,5 +245,7 @@
                               animations:addKeyFrames
                               completion:completion];
 }
+
+#endif
 
 @end
