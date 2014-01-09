@@ -1,7 +1,7 @@
 #import <UIKit/UIKit.h>
 #import "JMJParametricAnimation.h"
 
-@interface AnimationPreviewCell : UICollectionViewCell
+@interface JMJAnimationCatalogCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 

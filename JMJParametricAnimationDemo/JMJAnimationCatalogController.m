@@ -1,5 +1,5 @@
 #import "JMJAnimationCatalogController.h"
-#import "AnimationPreviewCell.h"
+#import "JMJAnimationCatalogCell.h"
 
 @interface JMJAnimationCatalogController ()
 
@@ -96,7 +96,7 @@ typedef enum AnimationPreview {
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    AnimationPreviewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER
+    JMJAnimationCatalogCell *cell = [cv dequeueReusableCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER
                                                                forIndexPath:indexPath];
     AnimationPreview animation = (AnimationPreview)[self.animationExamples[indexPath.row] integerValue];
     [self setupAnimationCell:cell
@@ -106,7 +106,7 @@ typedef enum AnimationPreview {
     return cell;
 }
 
--   (void)setupAnimationCell:(AnimationPreviewCell *)cell
+-   (void)setupAnimationCell:(JMJAnimationCatalogCell *)cell
                 forAnimation:(AnimationPreview)animation
 {
     JMJParametricAnimationTimeBlock timeFxn = nil;
@@ -241,14 +241,14 @@ typedef enum AnimationPreview {
 -   (void)collectionView:(UICollectionView *)collectionView
 didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    AnimationPreviewCell *cell = (AnimationPreviewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    JMJAnimationCatalogCell *cell = (JMJAnimationCatalogCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     [cell animateDot];
 }
 
 -     (void)collectionView:(UICollectionView *)collectionView
 didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    AnimationPreviewCell *cell = (AnimationPreviewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    JMJAnimationCatalogCell *cell = (JMJAnimationCatalogCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     [cell resetDot];
 }
 

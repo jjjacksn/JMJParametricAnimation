@@ -1,14 +1,6 @@
-//
-//  AppDelegate.m
-//  ParametricAnimationDemo
-//
-//  Created by J.J. on 1/7/14.
-//  Copyright (c) 2014 J.J. All rights reserved.
-//
+#import "JMJParametricAnimationDemoAppDelegate.h"
 
-#import "AppDelegate.h"
-
-@implementation AppDelegate
+@implementation JMJParametricAnimationDemoAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

@@ -1,11 +1,11 @@
-#import "AnimationPreviewCell.h"
+#import "JMJAnimationCatalogCell.h"
 
 static const CGFloat kLeftPosition = 0.05;
 static const CGFloat kRightPosition = 0.95;
 static const CGFloat kTopPosition = 0.25;
 static const CGFloat kBottomPosition = 0.75;
 
-@interface AnimationPreviewCell ()
+@interface JMJAnimationCatalogCell ()
 
 @property (nonatomic, strong) CAShapeLayer *startLine;
 @property (nonatomic, strong) CAShapeLayer *endLine;
@@ -21,7 +21,7 @@ static const CGFloat kBottomPosition = 0.75;
 
 @end
 
-@implementation AnimationPreviewCell
+@implementation JMJAnimationCatalogCell
 
 - (instancetype)init
 {

@@ -12,7 +12,7 @@
 		281C0EBC187C578F00877D6E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281C0EBB187C578F00877D6E /* UIKit.framework */; };
 		281C0EC2187C578F00877D6E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 281C0EC0187C578F00877D6E /* InfoPlist.strings */; };
 		281C0EC4187C578F00877D6E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 281C0EC3187C578F00877D6E /* main.m */; };
-		281C0EC8187C578F00877D6E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 281C0EC7187C578F00877D6E /* AppDelegate.m */; };
+		281C0EC8187C578F00877D6E /* JMJParametricAnimationDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 281C0EC7187C578F00877D6E /* JMJParametricAnimationDemoAppDelegate.m */; };
 		281C0ED3187C578F00877D6E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 281C0ED2187C578F00877D6E /* Images.xcassets */; };
 		281C0EDA187C578F00877D6E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281C0ED9187C578F00877D6E /* XCTest.framework */; };
 		281C0EDB187C578F00877D6E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281C0EB7187C578F00877D6E /* Foundation.framework */; };
@@ -24,7 +24,7 @@
 		281C0EF5187C59FD00877D6E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 281C0EF2187C59FD00877D6E /* README.md */; };
 		281C0EFF187C6B0500877D6E /* JMJAnimationCatalogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281C0EFE187C6B0500877D6E /* JMJAnimationCatalogController.m */; };
 		281C0F02187C6D0C00877D6E /* JMJParametricAnimationBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 281C0F01187C6D0C00877D6E /* JMJParametricAnimationBlocks.m */; };
-		281C0F05187C759700877D6E /* AnimationPreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 281C0F04187C759700877D6E /* AnimationPreviewCell.m */; };
+		281C0F05187C759700877D6E /* JMJAnimationCatalogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 281C0F04187C759700877D6E /* JMJAnimationCatalogCell.m */; };
 		28808F2C187CDDAC008B6BFB /* UIView+JMJParametricAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 28808F2B187CDDAC008B6BFB /* UIView+JMJParametricAnimation.m */; };
 		28808F2E187CDE36008B6BFB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28808F2D187CDE36008B6BFB /* QuartzCore.framework */; };
 		28A6A84F187E2314006FA913 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 281C0EC9187C578F00877D6E /* Main.storyboard */; };
@@ -49,8 +49,8 @@
 		281C0EC1187C578F00877D6E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		281C0EC3187C578F00877D6E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		281C0EC5187C578F00877D6E /* JMJParametricAnimationDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMJParametricAnimationDemo-Prefix.pch"; sourceTree = "<group>"; };
-		281C0EC6187C578F00877D6E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		281C0EC7187C578F00877D6E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		281C0EC6187C578F00877D6E /* JMJParametricAnimationDemoAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMJParametricAnimationDemoAppDelegate.h; sourceTree = "<group>"; };
+		281C0EC7187C578F00877D6E /* JMJParametricAnimationDemoAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMJParametricAnimationDemoAppDelegate.m; sourceTree = "<group>"; };
 		281C0ECA187C578F00877D6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		281C0ED2187C578F00877D6E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		281C0ED8187C578F00877D6E /* JMJParametricAnimationDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JMJParametricAnimationDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,8 +66,8 @@
 		281C0EFE187C6B0500877D6E /* JMJAnimationCatalogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMJAnimationCatalogController.m; sourceTree = "<group>"; };
 		281C0F00187C6D0C00877D6E /* JMJParametricAnimationBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMJParametricAnimationBlocks.h; sourceTree = "<group>"; };
 		281C0F01187C6D0C00877D6E /* JMJParametricAnimationBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMJParametricAnimationBlocks.m; sourceTree = "<group>"; };
-		281C0F03187C759700877D6E /* AnimationPreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationPreviewCell.h; sourceTree = "<group>"; };
-		281C0F04187C759700877D6E /* AnimationPreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationPreviewCell.m; sourceTree = "<group>"; };
+		281C0F03187C759700877D6E /* JMJAnimationCatalogCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMJAnimationCatalogCell.h; sourceTree = "<group>"; };
+		281C0F04187C759700877D6E /* JMJAnimationCatalogCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMJAnimationCatalogCell.m; sourceTree = "<group>"; };
 		28808F2A187CDDAC008B6BFB /* UIView+JMJParametricAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JMJParametricAnimation.h"; sourceTree = "<group>"; };
 		28808F2B187CDDAC008B6BFB /* UIView+JMJParametricAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JMJParametricAnimation.m"; sourceTree = "<group>"; };
 		28808F2D187CDE36008B6BFB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -136,15 +136,15 @@
 		281C0EBD187C578F00877D6E /* JMJParametricAnimationDemo */ = {
 			isa = PBXGroup;
 			children = (
-				281C0F03187C759700877D6E /* AnimationPreviewCell.h */,
-				281C0F04187C759700877D6E /* AnimationPreviewCell.m */,
-				281C0EC6187C578F00877D6E /* AppDelegate.h */,
-				281C0EC7187C578F00877D6E /* AppDelegate.m */,
+				281C0F03187C759700877D6E /* JMJAnimationCatalogCell.h */,
+				281C0F04187C759700877D6E /* JMJAnimationCatalogCell.m */,
+				281C0EC6187C578F00877D6E /* JMJParametricAnimationDemoAppDelegate.h */,
+				281C0EC7187C578F00877D6E /* JMJParametricAnimationDemoAppDelegate.m */,
 				281C0ED2187C578F00877D6E /* Images.xcassets */,
-				281C0EC9187C578F00877D6E /* Main.storyboard */,
-				281C0EBE187C578F00877D6E /* Supporting Files */,
 				281C0EFD187C6B0500877D6E /* JMJAnimationCatalogController.h */,
 				281C0EFE187C6B0500877D6E /* JMJAnimationCatalogController.m */,
+				281C0EC9187C578F00877D6E /* Main.storyboard */,
+				281C0EBE187C578F00877D6E /* Supporting Files */,
 			);
 			path = JMJParametricAnimationDemo;
 			sourceTree = "<group>";
@@ -294,9 +294,9 @@
 				281C0EFF187C6B0500877D6E /* JMJAnimationCatalogController.m in Sources */,
 				281C0EF3187C59FD00877D6E /* CAKeyframeAnimation+JMJParametricAnimation.m in Sources */,
 				28808F2C187CDDAC008B6BFB /* UIView+JMJParametricAnimation.m in Sources */,
-				281C0F05187C759700877D6E /* AnimationPreviewCell.m in Sources */,
+				281C0F05187C759700877D6E /* JMJAnimationCatalogCell.m in Sources */,
 				281C0F02187C6D0C00877D6E /* JMJParametricAnimationBlocks.m in Sources */,
-				281C0EC8187C578F00877D6E /* AppDelegate.m in Sources */,
+				281C0EC8187C578F00877D6E /* JMJParametricAnimationDemoAppDelegate.m in Sources */,
 				281C0EC4187C578F00877D6E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
