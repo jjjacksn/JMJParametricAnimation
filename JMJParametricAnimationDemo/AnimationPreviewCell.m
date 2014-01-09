@@ -1,7 +1,7 @@
 #import "AnimationPreviewCell.h"
 
-#import "UIView+Parametric.h"
-#import "CAKeyframeAnimation+Parametric.h"
+#import "CAKeyframeAnimation+JMJParametricAnimation.h"
+#import "UIView+JMJParametricAnimation.h"
 
 static const CGFloat kLeftPosition = 0.05;
 static const CGFloat kRightPosition = 0.95;
@@ -115,13 +115,13 @@ static const CGFloat kBottomPosition = 0.75;
                        self.bounds.size.height * kTopPosition);
 }
 
-- (void)setTimeFxn:(ParametricTimeBlock)timeFxn
+- (void)setTimeFxn:(JMJParametricAnimationTimeBlock)timeFxn
 {
     _timeFxn = [timeFxn copy];
     self.progressDot.center = self.startPoint;
 
     self.animX = [CAKeyframeAnimation animationWithKeyPath:@"position.x"
-                                                   timeFxn:kParametricTimeBlockLinear
+                                                   timeFxn:JMJParametricAnimationTimeBlockLinear
                                                 fromDouble:self.startPoint.x
                                                   toDouble:self.endPoint.x];
     self.animY = [CAKeyframeAnimation animationWithKeyPath:@"position.y"
@@ -135,17 +135,29 @@ static const CGFloat kBottomPosition = 0.75;
 #pragma mark - animation
 - (void)animateDot
 {
-    CAAnimationGroup *animation = [CAAnimationGroup animation];
-    animation.animations = @[ self.animX, self.animY ];
-    animation.duration = 1.0;
+    if (self.useCoreAnimation) {
+        CAAnimationGroup *animation = [CAAnimationGroup animation];
+        animation.animations = @[ self.animX, self.animY ];
+        animation.duration = 1.0;
 
-    [self.progressDot.layer addAnimation:animation
-                                  forKey:@"demoAnim"];
+        [self.progressDot.layer addAnimation:animation
+                                      forKey:@"demoAnim"];
 
-    dispatch_time_t callTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC));
-    dispatch_after(callTime, dispatch_get_main_queue(), ^{
-        self.progressDot.center  = self.endPoint;
-    });
+        dispatch_time_t callTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC));
+        dispatch_after(callTime, dispatch_get_main_queue(), ^{
+            self.progressDot.center  = self.endPoint;
+        });
+    } else {
+        [UIView animateKeyPath:@"center"
+                        object:self.progressDot
+                      duration:1.0
+                         delay:0
+                    completion:NULL
+                      xTimeFxn:JMJParametricAnimationTimeBlockLinear
+                      yTimeFxn:self.timeFxn
+                     fromPoint:self.startPoint
+                       toPoint:self.endPoint];
+    }
 }
 
 - (void)resetDot

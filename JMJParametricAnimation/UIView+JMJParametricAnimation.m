@@ -1,6 +1,6 @@
-#import "UIView+Parametric.h"
+#import "UIView+JMJParametricAnimation.h"
 
-@implementation UIView (Parametric)
+@implementation UIView (JMJParametricAnimation)
 
 
 #pragma mark - convenience methods
@@ -10,7 +10,7 @@
               duration:(NSTimeInterval)duration
                  delay:(NSTimeInterval)delay
             completion:(void (^)(BOOL))completion
-               timeFxn:(ParametricTimeBlock)timeFxn
+               timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
             fromDouble:(double)fromValue
               toDouble:(double)toValue
 {
@@ -20,7 +20,7 @@
                    delay:delay
               completion:completion
                  timeFxn:timeFxn
-                valueFxn:kParametricValueBlockDouble
+                valueFxn:JMJParametricValueBlockDouble
                fromValue:@(fromValue)
                  toValue:@(toValue)];
 }
@@ -30,7 +30,7 @@
               duration:(NSTimeInterval)duration
                  delay:(NSTimeInterval)delay
             completion:(void (^)(BOOL))completion
-               timeFxn:(ParametricTimeBlock)timeFxn
+               timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
              fromPoint:(CGPoint)fromValue
                toPoint:(CGPoint)toValue
 {
@@ -40,7 +40,7 @@
                    delay:delay
               completion:completion
                  timeFxn:timeFxn
-                valueFxn:kParametricValueBlockPoint
+                valueFxn:JMJParametricValueBlockPoint
                fromValue:[NSValue valueWithCGPoint:fromValue]
                  toValue:[NSValue valueWithCGPoint:toValue]];
 }
@@ -50,7 +50,7 @@
               duration:(NSTimeInterval)duration
                  delay:(NSTimeInterval)delay
             completion:(void (^)(BOOL))completion
-               timeFxn:(ParametricTimeBlock)timeFxn
+               timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
               fromSize:(CGSize)fromValue
                 toSize:(CGSize)toValue
 {
@@ -60,7 +60,7 @@
                    delay:delay
               completion:completion
                  timeFxn:timeFxn
-                valueFxn:kParametricValueBlockSize
+                valueFxn:JMJParametricValueBlockSize
                fromValue:[NSValue valueWithCGSize:fromValue]
                  toValue:[NSValue valueWithCGSize:toValue]];
 }
@@ -70,7 +70,7 @@
               duration:(NSTimeInterval)duration
                  delay:(NSTimeInterval)delay
             completion:(void (^)(BOOL))completion
-               timeFxn:(ParametricTimeBlock)timeFxn
+               timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
               fromRect:(CGRect)fromValue
                 toRect:(CGRect)toValue
 {
@@ -80,7 +80,7 @@
                    delay:delay
               completion:completion
                  timeFxn:timeFxn
-                valueFxn:kParametricValueBlockRect
+                valueFxn:JMJParametricValueBlockRect
                fromValue:[NSValue valueWithCGRect:fromValue]
                  toValue:[NSValue valueWithCGRect:toValue]];
 }
@@ -90,7 +90,7 @@
               duration:(NSTimeInterval)duration
                  delay:(NSTimeInterval)delay
             completion:(void (^)(BOOL))completion
-               timeFxn:(ParametricTimeBlock)timeFxn
+               timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
           fromColorRef:(CGColorRef)fromValue
             toColorRef:(CGColorRef)toValue
 {
@@ -100,7 +100,7 @@
                    delay:delay
               completion:completion
                  timeFxn:timeFxn
-                valueFxn:kParametricValueBlockColor
+                valueFxn:JMJParametricValueBlockColor
                fromValue:(__bridge id)fromValue
                  toValue:(__bridge id)toValue];
 }
@@ -113,12 +113,12 @@
               duration:(NSTimeInterval)duration
                  delay:(NSTimeInterval)delay
             completion:(void (^)(BOOL))completion
-              xTimeFxn:(ParametricTimeBlock)xTimeFxn
-              yTimeFxn:(ParametricTimeBlock)yTimeFxn
+              xTimeFxn:(JMJParametricAnimationTimeBlock)xTimeFxn
+              yTimeFxn:(JMJParametricAnimationTimeBlock)yTimeFxn
              fromPoint:(CGPoint)fromValue
                toPoint:(CGPoint)toValue;
 {
-    ParametricAnimationBlock animations = ^(double time) {
+    JMJParametricAnimationBlock animations = ^(double time) {
         double x = kParametricAnimationLerpDouble(xTimeFxn(time), fromValue.x, toValue.x);
         double y = kParametricAnimationLerpDouble(yTimeFxn(time), fromValue.y, toValue.y);
 
@@ -138,12 +138,12 @@
               duration:(NSTimeInterval)duration
                  delay:(NSTimeInterval)delay
             completion:(void (^)(BOOL))completion
-          widthTimeFxn:(ParametricTimeBlock)widthTimeFxn
-         heightTimeFxn:(ParametricTimeBlock)heightTimeFxn
+          widthTimeFxn:(JMJParametricAnimationTimeBlock)widthTimeFxn
+         heightTimeFxn:(JMJParametricAnimationTimeBlock)heightTimeFxn
               fromSize:(CGSize)fromValue
                 toSize:(CGSize)toValue
 {
-    ParametricAnimationBlock animations = ^(double time) {
+    JMJParametricAnimationBlock animations = ^(double time) {
         double w = kParametricAnimationLerpDouble(widthTimeFxn(time), fromValue.width, toValue.width);
         double h = kParametricAnimationLerpDouble(heightTimeFxn(time), fromValue.height, toValue.height);
 
@@ -165,8 +165,8 @@
               duration:(NSTimeInterval)duration
                  delay:(NSTimeInterval)delay
             completion:(void (^)(BOOL))completion
-               timeFxn:(ParametricTimeBlock)timeFxn
-              valueFxn:(ParametricValueBlock)valueFxn
+               timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
+              valueFxn:(JMJParametricValueBlock)valueFxn
              fromValue:(id)fromValue
                toValue:(id)toValue
 {
@@ -179,7 +179,7 @@
                 valueFxn:valueFxn
                fromValue:fromValue
                  toValue:toValue
-                 inSteps:kParametricAnimationNumSteps];
+                 inSteps:JMJParametricAnimationNumSteps];
 }
 
 + (void)animateKeyPath:(NSString *)path
@@ -187,13 +187,13 @@
               duration:(NSTimeInterval)duration
                  delay:(NSTimeInterval)delay
             completion:(void (^)(BOOL))completion
-               timeFxn:(ParametricTimeBlock)timeFxn
-              valueFxn:(ParametricValueBlock)valueFxn
+               timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
+              valueFxn:(JMJParametricValueBlock)valueFxn
              fromValue:(id)fromValue
                toValue:(id)toValue
                inSteps:(NSUInteger)numSteps
 {
-    ParametricAnimationBlock animations = ^(double time) {
+    JMJParametricAnimationBlock animations = ^(double time) {
         id value = valueFxn(timeFxn(time), fromValue, toValue);
         [object setValue:value
               forKeyPath:path];
@@ -208,19 +208,19 @@
 
 + (void)animateParametricallyWithDuration:(NSTimeInterval)duration
                                     delay:(NSTimeInterval)delay
-                               animations:(ParametricAnimationBlock)animations
+                               animations:(JMJParametricAnimationBlock)animations
                                completion:(void (^)(BOOL))completion;
 {
     [self animateParametricallyWithDuration:duration
                                       delay:delay
                                  animations:animations
                                  completion:completion
-                                    inSteps:kParametricAnimationNumSteps];
+                                    inSteps:JMJParametricAnimationNumSteps];
 }
 
 + (void)animateParametricallyWithDuration:(NSTimeInterval)duration
                                     delay:(NSTimeInterval)delay
-                               animations:(ParametricAnimationBlock)animations
+                               animations:(JMJParametricAnimationBlock)animations
                                completion:(void (^)(BOOL))completion
                                   inSteps:(NSUInteger)numSteps
 {

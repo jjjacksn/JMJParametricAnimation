@@ -1,18 +1,10 @@
-//
-//  ParametricAnimationDemoTests.m
-//  ParametricAnimationDemoTests
-//
-//  Created by J.J. on 1/7/14.
-//  Copyright (c) 2014 J.J. All rights reserved.
-//
-
 #import <XCTest/XCTest.h>
 
-@interface ParametricAnimationDemoTests : XCTestCase
+@interface JMJParametricAnimationDemoTests : XCTestCase
 
 @end
 
-@implementation ParametricAnimationDemoTests
+@implementation JMJParametricAnimationDemoTests
 
 - (void)setUp
 {

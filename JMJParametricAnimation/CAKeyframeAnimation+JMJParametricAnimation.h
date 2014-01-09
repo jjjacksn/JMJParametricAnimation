@@ -1,7 +1,7 @@
 #import <QuartzCore/QuartzCore.h>
-#import "ParametricAnimationBlocks.h"
+#import "JMJParametricAnimationBlocks.h"
 
-@interface CAKeyframeAnimation (Parametric)
+@interface CAKeyframeAnimation (JMJParametricAnimation)
 
 
 #pragma mark - convenience constructors
@@ -11,7 +11,7 @@
  * @see animationWithKeyPath:timeFxn:valueFxn:fromValue:toValue:
  */
 + (id)animationWithKeyPath:(NSString *)path
-                   timeFxn:(ParametricTimeBlock)timeFxn
+                   timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
                 fromDouble:(double)fromValue
                   toDouble:(double)toValue;
 
@@ -20,7 +20,7 @@
  * @see animationWithKeyPath:timeFxn:valueFxn:fromValue:toValue:
  */
 + (id)animationWithKeyPath:(NSString *)path
-                   timeFxn:(ParametricTimeBlock)timeFxn
+                   timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
                  fromPoint:(CGPoint)fromValue
                    toPoint:(CGPoint)toValue;
 
@@ -29,7 +29,7 @@
  * @see animationWithKeyPath:timeFxn:valueFxn:fromValue:toValue:
  */
 + (id)animationWithKeyPath:(NSString *)path
-                   timeFxn:(ParametricTimeBlock)timeFxn
+                   timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
                   fromSize:(CGSize)fromValue
                     toSize:(CGSize)toValue;
 
@@ -38,7 +38,7 @@
  * @see animationWithKeyPath:timeFxn:valueFxn:fromValue:toValue:
  */
 + (id)animationWithKeyPath:(NSString *)path
-                   timeFxn:(ParametricTimeBlock)timeFxn
+                   timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
                   fromRect:(CGRect)fromValue
                     toRect:(CGRect)toValue;
 
@@ -47,7 +47,7 @@
  * @see animationWithKeyPath:timeFxn:valueFxn:fromValue:toValue:
  */
 + (id)animationWithKeyPath:(NSString *)path
-                   timeFxn:(ParametricTimeBlock)timeFxn
+                   timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
                  fromColor:(CGColorRef)fromValue
                    toColor:(CGColorRef)toValue;
 
@@ -70,8 +70,8 @@
  * @return a CAKeyframeAnimation which animates from fromValue to toValue
  */
 + (id)animationWithKeyPath:(NSString *)path
-                   timeFxn:(ParametricTimeBlock)timeFxn
-                  valueFxn:(ParametricValueBlock)valueFxn
+                   timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
+                  valueFxn:(JMJParametricValueBlock)valueFxn
                  fromValue:(id)fromValue
                    toValue:(id)toValue;
 
@@ -81,8 +81,8 @@
  * @see animationWithKeyPath:timeFxn:valueFxn:fromValue:toValue:
  */
 + (id)animationWithKeyPath:(NSString *)path
-                   timeFxn:(ParametricTimeBlock)timeFxn
-                  valueFxn:(ParametricValueBlock)valueFxn
+                   timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
+                  valueFxn:(JMJParametricValueBlock)valueFxn
                  fromValue:(id)fromValue
                    toValue:(id)toValue
                    inSteps:(NSUInteger)numSteps;

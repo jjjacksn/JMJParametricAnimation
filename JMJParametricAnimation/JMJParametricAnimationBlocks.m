@@ -1,10 +1,10 @@
-#import "ParametricAnimationBlocks.h"
+#import "JMJParametricAnimationBlocks.h"
 
-@implementation ParametricAnimationBlocks
+@implementation JMJParametricAnimationBlocks
 
 
 #pragma mark - constants
-const NSInteger kParametricAnimationNumSteps = 101;
+const NSInteger JMJParametricAnimationNumSteps = 101;
 
 
 #pragma mark - bezier
@@ -38,7 +38,7 @@ double xForTime(double time, double ctx1, double ctx2)
     return x;
 }
 
-const double (^kParametricBezierEvaluator)(double, CGPoint, CGPoint) =
+const double (^JMJParametricAnimationBezierEvaluator)(double, CGPoint, CGPoint) =
 ^(double time, CGPoint ct1, CGPoint ct2) {
     double Cy = 3 * ct1.y;
     double By = 3 * (ct2.y - ct1.y) - Cy;
@@ -49,75 +49,75 @@ const double (^kParametricBezierEvaluator)(double, CGPoint, CGPoint) =
 
 
 #pragma mark - time blocks
-const ParametricTimeBlock kParametricTimeBlockLinear =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockLinear =
 ^(double time) {
     return time;
 };
 
-const ParametricTimeBlock kParametricTimeBlockAppleIn =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockAppleIn =
 ^(double time) {
     CGPoint ct1 = CGPointMake(0.42, 0.0), ct2 = CGPointMake(1.0, 1.0);
-    return kParametricBezierEvaluator(time, ct1, ct2);
+    return JMJParametricAnimationBezierEvaluator(time, ct1, ct2);
 };
-const ParametricTimeBlock kParametricTimeBlockAppleOut =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockAppleOut =
 ^(double time) {
     CGPoint ct1 = CGPointMake(0.0, 0.0), ct2 = CGPointMake(0.58, 1.0);
-    return kParametricBezierEvaluator(time, ct1, ct2);
+    return JMJParametricAnimationBezierEvaluator(time, ct1, ct2);
 };
 
-const ParametricTimeBlock kParametricTimeBlockAppleInOut =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockAppleInOut =
 ^(double time) {
     CGPoint ct1 = CGPointMake(0.42, 0.0), ct2 = CGPointMake(0.58, 1.0);
-    return kParametricBezierEvaluator(time, ct1, ct2);
+    return JMJParametricAnimationBezierEvaluator(time, ct1, ct2);
 };
 
-const ParametricTimeBlock kParametricTimeBlockBackIn =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockBackIn =
 ^(double time) {
     CGPoint ct1 = CGPointMake(0.6, -0.28), ct2 = CGPointMake(0.735, 0.045);
-    return kParametricBezierEvaluator(time, ct1, ct2);
+    return JMJParametricAnimationBezierEvaluator(time, ct1, ct2);
 };
 
-const ParametricTimeBlock kParametricTimeBlockBackOut =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockBackOut =
 ^(double time) {
     CGPoint ct1 = CGPointMake(0.175, 0.885), ct2 = CGPointMake(0.32, 1.275);
-    return kParametricBezierEvaluator(time, ct1, ct2);
+    return JMJParametricAnimationBezierEvaluator(time, ct1, ct2);
 };
 
-const ParametricTimeBlock kParametricTimeBlockBackInOut =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockBackInOut =
 ^(double time) {
     CGPoint ct1 = CGPointMake(0.68, -0.55), ct2 = CGPointMake(0.265, 1.55);
-    return kParametricBezierEvaluator(time, ct1, ct2);
+    return JMJParametricAnimationBezierEvaluator(time, ct1, ct2);
 };
 
-const ParametricTimeBlock kParametricTimeBlockQuadraticIn =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockQuadraticIn =
 ^(double time) {
     return pow(time, 2);
 };
 
-const ParametricTimeBlock kParametricTimeBlockQuadraticOut =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockQuadraticOut =
 ^(double time) {
     return 1 - pow(1 - time, 2);
 };
 
-const ParametricTimeBlock kParametricTimeBlockQuadraticInOut =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockQuadraticInOut =
 ^(double time) {
     time *= 2.0;
-    if (time < 1) return kParametricTimeBlockQuadraticIn(time) / 2.0;
+    if (time < 1) return JMJParametricAnimationTimeBlockQuadraticIn(time) / 2.0;
     time--;
-    return (1 + kParametricTimeBlockQuadraticOut(time)) / 2.0;
+    return (1 + JMJParametricAnimationTimeBlockQuadraticOut(time)) / 2.0;
 };
 
-const ParametricTimeBlock kParametricTimeBlockCubicIn =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockCubicIn =
 ^(double time) {
     return pow(time, 3);
 };
 
-const ParametricTimeBlock kParametricTimeBlockCubicOut =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockCubicOut =
 ^(double time) {
     return 1 - pow(1 - time, 3);
 };
 
-const ParametricTimeBlock kParametricTimeBlockCubicInOut =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockCubicInOut =
 ^(double time) {
     time *= 2.0;
     if (time < 1) {
@@ -128,7 +128,7 @@ const ParametricTimeBlock kParametricTimeBlockCubicInOut =
     return 0.5 * pow(time, 3) + 1;
 };
 
-const ParametricTimeBlock kParametricTimeBlockExpoIn =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockExpoIn =
 ^(double time) {
     if (time == 0.0) {
         return 0.0;
@@ -136,7 +136,7 @@ const ParametricTimeBlock kParametricTimeBlockExpoIn =
     return pow(2, 10 * (time - 1));
 };
 
-const ParametricTimeBlock kParametricTimeBlockExpoOut =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockExpoOut =
 ^(double time) {
     if (time == 1.0) {
         return 1.0;
@@ -144,7 +144,7 @@ const ParametricTimeBlock kParametricTimeBlockExpoOut =
     return -pow(2, -10 * time) + 1;
 };
 
-const ParametricTimeBlock kParametricTimeBlockExpoInOut =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockExpoInOut =
 ^(double time) {
     if (time == 0) {
         return 0.0;
@@ -158,17 +158,17 @@ const ParametricTimeBlock kParametricTimeBlockExpoInOut =
     return 0.5 * (-pow(2, -10 * time) + 2);
 };
 
-const ParametricTimeBlock kParametricTimeBlockCircularIn =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockCircularIn =
 ^(double time) {
     return 1 - sqrt(1 - time * time);
 };
 
-const ParametricTimeBlock kParametricTimeBlockCircularOut =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockCircularOut =
 ^(double time) {
     return sqrt(1 - pow(time - 1, 2));
 };
 
-const ParametricTimeBlock kParametricTimeBlockCircularInOut =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockCircularInOut =
 ^(double time) {
     time *= 2;
     if (time < 1) return -0.5 * (sqrt(1 - pow(time, 2)) - 1);
@@ -176,27 +176,27 @@ const ParametricTimeBlock kParametricTimeBlockCircularInOut =
     return 0.5 * (sqrt(1 - pow(time, 2)) + 1);
 };
 
-const ParametricTimeBlock kParametricTimeBlockSineIn =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockSineIn =
 ^(double time) {
     return -cos(time * M_PI_2) + 1;
 };
 
-const ParametricTimeBlock kParametricTimeBlockSineOut =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockSineOut =
 ^(double time) {
     return sin(time * M_PI_2);
 };
 
-const ParametricTimeBlock kParametricTimeBlockSineInOut =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockSineInOut =
 ^(double time) {
     return -0.5 * (cos(time * M_PI) - 1);
 };
 
-const ParametricTimeBlock kParametricTimeBlockBounceIn =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockBounceIn =
 ^(double time) {
-    return 1 - kParametricTimeBlockBounceOut(1 - time);
+    return 1 - JMJParametricAnimationTimeBlockBounceOut(1 - time);
 };
 
-const ParametricTimeBlock kParametricTimeBlockBounceOut =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockBounceOut =
 ^(double time) {
     if (time < (1 / 2.75)) {
         return 7.5625 * pow(time, 2);
@@ -212,16 +212,16 @@ const ParametricTimeBlock kParametricTimeBlockBounceOut =
     }
 };
 
-const ParametricTimeBlock kParametricTimeBlockBounceInOut =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockBounceInOut =
 ^(double time) {
-    if (time < 0.5) return kParametricTimeBlockBounceIn(time * 2) / 2.0;
-    return (1 + kParametricTimeBlockBounceOut(time * 2 - 1)) / 2.0;
+    if (time < 0.5) return JMJParametricAnimationTimeBlockBounceIn(time * 2) / 2.0;
+    return (1 + JMJParametricAnimationTimeBlockBounceOut(time * 2 - 1)) / 2.0;
 };
 
 static const CGFloat kElasticPeriod = 0.3;
 static const CGFloat kElasticAmplitude = 1.0;
 static const CGFloat kElasticShiftRatio = 0.25;
-const ParametricTimeBlock kParametricTimeBlockElasticIn =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockElasticIn =
 ^(double time) {
     if (time <= 0.0) return 0.0;
     if (time >= 1.0) return 1.0;
@@ -234,7 +234,7 @@ const ParametricTimeBlock kParametricTimeBlockElasticIn =
 
     return result;
 };
-const ParametricTimeBlock kParametricTimeBlockElasticOut =
+const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockElasticOut =
 ^(double time) {
     if (time <= 0.0) return 0.0;
     if (time >= 1.0) return 1.0;
@@ -248,47 +248,47 @@ const ParametricTimeBlock kParametricTimeBlockElasticOut =
     return result;
 };
 
-+ (ParametricTimeBlock)elasticParametricTimeBlockWithEaseIn:(BOOL)easeIn
++ (JMJParametricAnimationTimeBlock)elasticJMJParametricAnimationTimeBlockWithEaseIn:(BOOL)easeIn
                                                      period:(double)period
                                                   amplitude:(double)amplitude
 {
-    return [self elasticParametricTimeBlockWithEaseIn:easeIn
+    return [self elasticJMJParametricAnimationTimeBlockWithEaseIn:easeIn
                                                period:period
                                             amplitude:amplitude
                                         andShiftRatio:kElasticShiftRatio];
 }
 
-+ (ParametricTimeBlock)elasticParametricTimeBlockWithEaseIn:(BOOL)easeIn
++ (JMJParametricAnimationTimeBlock)elasticJMJParametricAnimationTimeBlockWithEaseIn:(BOOL)easeIn
                                                      period:(double)period
                                                   amplitude:(double)amplitude
                                                     bounded:(BOOL)bounded
 {
-    return [self elasticParametricTimeBlockWithEaseIn:easeIn
+    return [self elasticJMJParametricAnimationTimeBlockWithEaseIn:easeIn
                                                period:period
                                             amplitude:amplitude
                                         andShiftRatio:kElasticShiftRatio
                                               bounded:bounded];
 }
 
-+ (ParametricTimeBlock)elasticParametricTimeBlockWithEaseIn:(BOOL)easeIn
++ (JMJParametricAnimationTimeBlock)elasticJMJParametricAnimationTimeBlockWithEaseIn:(BOOL)easeIn
                                                      period:(double)period
                                                   amplitude:(double)amplitude
                                               andShiftRatio:(double)shiftRatio
 {
-    return [self elasticParametricTimeBlockWithEaseIn:easeIn
+    return [self elasticJMJParametricAnimationTimeBlockWithEaseIn:easeIn
                                                period:period
                                             amplitude:amplitude
                                         andShiftRatio:shiftRatio
                                               bounded:NO];
 }
 
-+ (ParametricTimeBlock)elasticParametricTimeBlockWithEaseIn:(BOOL)easeIn
++ (JMJParametricAnimationTimeBlock)elasticJMJParametricAnimationTimeBlockWithEaseIn:(BOOL)easeIn
                                                      period:(double)period
                                                   amplitude:(double)amplitude
                                               andShiftRatio:(double)shiftRatio
                                                     bounded:(BOOL)bounded
 {
-    ParametricTimeBlock elasticBlock =
+    JMJParametricAnimationTimeBlock elasticBlock =
     ^(double time) {
         if (time <= 0) return 0.0;
         if (time >= 1) return 1.0;
@@ -309,7 +309,7 @@ const ParametricTimeBlock kParametricTimeBlockElasticOut =
 
 
 #pragma mark - value blocks
-const ParametricValueBlock kParametricValueBlockDouble =
+const JMJParametricValueBlock JMJParametricValueBlockDouble =
 ^(double progress, id fromValue, id toValue) {
     NSValue *value;
     double from = [fromValue doubleValue], to = [toValue doubleValue];
@@ -317,7 +317,7 @@ const ParametricValueBlock kParametricValueBlockDouble =
     return value;
 };
 
-const ParametricValueBlock kParametricValueBlockPoint =
+const JMJParametricValueBlock JMJParametricValueBlockPoint =
 ^(double progress, id fromValue, id toValue) {
     NSValue *value;
     CGPoint from, to;
@@ -327,7 +327,7 @@ const ParametricValueBlock kParametricValueBlockPoint =
     return value;
 };
 
-const ParametricValueBlock kParametricValueBlockSize =
+const JMJParametricValueBlock JMJParametricValueBlockSize =
 ^(double progress, id fromValue, id toValue) {
     NSValue *value;
     CGSize from, to;
@@ -337,7 +337,7 @@ const ParametricValueBlock kParametricValueBlockSize =
     return value;
 };
 
-const ParametricValueBlock kParametricValueBlockRect =
+const JMJParametricValueBlock JMJParametricValueBlockRect =
 ^(double progress, id fromValue, id toValue) {
     NSValue *value;
     CGRect from, to;
@@ -348,7 +348,7 @@ const ParametricValueBlock kParametricValueBlockRect =
     return value;
 };
 
-const ParametricValueBlock kParametricValueBlockColor =
+const JMJParametricValueBlock JMJParametricValueBlockColor =
 ^(double progress, id fromValue, id toValue) {
     id value = nil;
     CGColorRef from = (__bridge CGColorRef)fromValue;
@@ -358,10 +358,10 @@ const ParametricValueBlock kParametricValueBlockColor =
     return value;
 };
 
-+ (ParametricValueBlock)arcPathParametricValueBlockWithRadius:(CGFloat)radius
++ (JMJParametricValueBlock)arcPathJMJParametricValueBlockWithRadius:(CGFloat)radius
                                                     andCenter:(CGPoint)center
 {
-    const ParametricValueBlock arcAnimationHelperBlock =
+    const JMJParametricValueBlock arcAnimationHelperBlock =
     ^(double progress, id fromAngle, id toAngle) {
         NSValue *value;
         CGFloat start, end;

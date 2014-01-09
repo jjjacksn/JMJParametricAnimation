@@ -1,7 +1,7 @@
-#import "ViewController.h"
+#import "JMJAnimationCatalogController.h"
 #import "AnimationPreviewCell.h"
 
-@interface ViewController ()
+@interface JMJAnimationCatalogController ()
 
 @property (nonatomic, strong) NSArray *animationExamples;
 
@@ -38,7 +38,7 @@ typedef enum AnimationPreview {
     kAnimationPreviewBackInExpoOut
 } AnimationPreview;
 
-@implementation ViewController
+@implementation JMJAnimationCatalogController
 
 #define CELL_REUSE_IDENTIFIER @"AnimationCell"
 
@@ -109,122 +109,122 @@ typedef enum AnimationPreview {
 -   (void)setupAnimationCell:(AnimationPreviewCell *)cell
                 forAnimation:(AnimationPreview)animation
 {
-    ParametricTimeBlock timeFxn = nil;
+    JMJParametricAnimationTimeBlock timeFxn = nil;
     NSString *title = @"Unknown";
     switch (animation) {
         case kAnimationPreviewLinear:
-            timeFxn = kParametricTimeBlockLinear;
+            timeFxn = JMJParametricAnimationTimeBlockLinear;
             title = @"Linear";
             break;
         case kAnimationPreviewAppleIn:
-            timeFxn = kParametricTimeBlockAppleIn;
+            timeFxn = JMJParametricAnimationTimeBlockAppleIn;
             title = @"Apple In";
             break;
         case kAnimationPreviewAppleOut:
-            timeFxn = kParametricTimeBlockAppleOut;
+            timeFxn = JMJParametricAnimationTimeBlockAppleOut;
             title = @"Apple Out";
             break;
         case kAnimationPreviewAppleInOut:
-            timeFxn = kParametricTimeBlockAppleInOut;
+            timeFxn = JMJParametricAnimationTimeBlockAppleInOut;
             title = @"Apple In-Out";
             break;
         case kAnimationPreviewBackIn:
-            timeFxn = kParametricTimeBlockBackIn;
+            timeFxn = JMJParametricAnimationTimeBlockBackIn;
             title = @"Back In";
             break;
         case kAnimationPreviewBackOut:
-            timeFxn = kParametricTimeBlockBackOut;
+            timeFxn = JMJParametricAnimationTimeBlockBackOut;
             title = @"Back Out";
             break;
         case kAnimationPreviewBackInOut:
-            timeFxn = kParametricTimeBlockBackInOut;
+            timeFxn = JMJParametricAnimationTimeBlockBackInOut;
             title = @"Back In-Out";
             break;
         case kAnimationPreviewQuadraticIn:
-            timeFxn = kParametricTimeBlockQuadraticIn;
+            timeFxn = JMJParametricAnimationTimeBlockQuadraticIn;
             title = @"Quadratic In";
             break;
         case kAnimationPreviewQuadraticOut:
-            timeFxn = kParametricTimeBlockQuadraticOut;
+            timeFxn = JMJParametricAnimationTimeBlockQuadraticOut;
             title = @"Quadratic Out";
             break;
         case kAnimationPreviewQuadraticInOut:
-            timeFxn = kParametricTimeBlockQuadraticInOut;
+            timeFxn = JMJParametricAnimationTimeBlockQuadraticInOut;
             title = @"Quadratic In-Out";
             break;
         case kAnimationPreviewCubicIn:
-            timeFxn = kParametricTimeBlockCubicIn;
+            timeFxn = JMJParametricAnimationTimeBlockCubicIn;
             title = @"Cubic In";
             break;
         case kAnimationPreviewCubicOut:
-            timeFxn = kParametricTimeBlockCubicOut;
+            timeFxn = JMJParametricAnimationTimeBlockCubicOut;
             title = @"Cubic Out";
             break;
         case kAnimationPreviewCubicInOut:
-            timeFxn = kParametricTimeBlockCubicInOut;
+            timeFxn = JMJParametricAnimationTimeBlockCubicInOut;
             title = @"Cubic In-Out";
             break;
         case kAnimationPreviewCircularIn:
-            timeFxn = kParametricTimeBlockCircularIn;
+            timeFxn = JMJParametricAnimationTimeBlockCircularIn;
             title = @"Circular In";
             break;
         case kAnimationPreviewCircularOut:
-            timeFxn = kParametricTimeBlockCircularOut;
+            timeFxn = JMJParametricAnimationTimeBlockCircularOut;
             title = @"Circular Out";
             break;
         case kAnimationPreviewCircularInOut:
-            timeFxn = kParametricTimeBlockCircularInOut;
+            timeFxn = JMJParametricAnimationTimeBlockCircularInOut;
             title = @"Circular In-Out";
             break;
         case kAnimationPreviewExpoIn:
-            timeFxn = kParametricTimeBlockExpoIn;
+            timeFxn = JMJParametricAnimationTimeBlockExpoIn;
             title = @"Expo In";
             break;
         case kAnimationPreviewExpoOut:
-            timeFxn = kParametricTimeBlockExpoOut;
+            timeFxn = JMJParametricAnimationTimeBlockExpoOut;
             title = @"Expo Out";
             break;
         case kAnimationPreviewExpoInOut:
-            timeFxn = kParametricTimeBlockExpoInOut;
+            timeFxn = JMJParametricAnimationTimeBlockExpoInOut;
             title = @"Expo In-Out";
             break;
         case kAnimationPreviewSineIn:
-            timeFxn = kParametricTimeBlockSineIn;
+            timeFxn = JMJParametricAnimationTimeBlockSineIn;
             title = @"Sine In";
             break;
         case kAnimationPreviewSineOut: 
-            timeFxn = kParametricTimeBlockSineOut;
+            timeFxn = JMJParametricAnimationTimeBlockSineOut;
             title = @"Sine Out";
             break;
         case kAnimationPreviewSineInOut: 
-            timeFxn = kParametricTimeBlockSineInOut;
+            timeFxn = JMJParametricAnimationTimeBlockSineInOut;
             title = @"Sine In-Out";
             break;
         case kAnimationPreviewBounceIn:
-            timeFxn = kParametricTimeBlockBounceIn;
+            timeFxn = JMJParametricAnimationTimeBlockBounceIn;
             title = @"Bounce In";
             break;
         case kAnimationPreviewBounceOut:
-            timeFxn = kParametricTimeBlockBounceOut;
+            timeFxn = JMJParametricAnimationTimeBlockBounceOut;
             title = @"Bounce Out";
             break;
         case kAnimationPreviewBounceInOut:
-            timeFxn = kParametricTimeBlockBounceInOut;
+            timeFxn = JMJParametricAnimationTimeBlockBounceInOut;
             title = @"Bounce In-Out";
             break;
         case kAnimationPreviewElasticIn:
-            timeFxn = kParametricTimeBlockElasticIn;
+            timeFxn = JMJParametricAnimationTimeBlockElasticIn;
             title = @"Elastic In";
             break;
         case kAnimationPreviewElasticOut:
-            timeFxn = kParametricTimeBlockElasticOut;
+            timeFxn = JMJParametricAnimationTimeBlockElasticOut;
             title = @"Elastic Out";
             break;
         case kAnimationPreviewBackInExpoOut:
             timeFxn = ^(double time) {
-                if (time < 0.5) return kParametricTimeBlockBackIn(time * 2) / 2;
+                if (time < 0.5) return JMJParametricAnimationTimeBlockBackIn(time * 2) / 2;
                 time -= 0.5;
-                return (kParametricTimeBlockBackIn(1.0) + kParametricTimeBlockExpoOut(time * 2)) / 2;
+                return (JMJParametricAnimationTimeBlockBackIn(1.0) + JMJParametricAnimationTimeBlockExpoOut(time * 2)) / 2;
             };
             title = @"Back In Expo Out";
             break;

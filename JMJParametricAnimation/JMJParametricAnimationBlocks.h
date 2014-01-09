@@ -11,7 +11,7 @@
  * @return A value from representing the progress between start value and finish value for the given time.
  * This value may be outside the range of [0, 1].
  */
-typedef double (^ParametricTimeBlock)(double time);
+typedef double (^JMJParametricAnimationTimeBlock)(double time);
 
 /**
  * A block that interpolates between two value objects.
@@ -26,7 +26,7 @@ typedef double (^ParametricTimeBlock)(double time);
  * @return An interpolated value between fromValue toValue for the given progress. This should be of
  * the same type as fromValue and toValue.
  */
-typedef id (^ParametricValueBlock)(double progress,
+typedef id (^JMJParametricValueBlock)(double progress,
                                    id fromValue,
                                    id toValue);
 
@@ -36,58 +36,60 @@ typedef id (^ParametricValueBlock)(double progress,
  *
  * @param time A value from 0 to 1 representing the progress between start time and finish time.
  */
-typedef void (^ParametricAnimationBlock)(double time);
+typedef void (^JMJParametricAnimationBlock)(double time);
 
 
 #pragma mark - constants
-extern const NSInteger kParametricAnimationNumSteps;
+extern const NSInteger JMJParametricAnimationNumSteps;
 
 
-@interface ParametricAnimationBlocks : NSObject
+@interface JMJParametricAnimationBlocks : NSObject
 
 
 #pragma mark - time blocks
-extern const ParametricTimeBlock kParametricTimeBlockLinear;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockLinear;
 
-extern const ParametricTimeBlock kParametricTimeBlockAppleIn;
-extern const ParametricTimeBlock kParametricTimeBlockAppleOut;
-extern const ParametricTimeBlock kParametricTimeBlockAppleInOut;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockAppleIn;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockAppleOut;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockAppleInOut;
 
-extern const ParametricTimeBlock kParametricTimeBlockBackIn;
-extern const ParametricTimeBlock kParametricTimeBlockBackOut;
-extern const ParametricTimeBlock kParametricTimeBlockBackInOut;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockBackIn;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockBackOut;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockBackInOut;
 
-extern const ParametricTimeBlock kParametricTimeBlockQuadraticIn;
-extern const ParametricTimeBlock kParametricTimeBlockQuadraticOut;
-extern const ParametricTimeBlock kParametricTimeBlockQuadraticInOut;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockQuadraticIn;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockQuadraticOut;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockQuadraticInOut;
 
-extern const ParametricTimeBlock kParametricTimeBlockCubicIn;
-extern const ParametricTimeBlock kParametricTimeBlockCubicOut;
-extern const ParametricTimeBlock kParametricTimeBlockCubicInOut;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockCubicIn;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockCubicOut;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockCubicInOut;
 
-extern const ParametricTimeBlock kParametricTimeBlockCircularIn;
-extern const ParametricTimeBlock kParametricTimeBlockCircularOut;
-extern const ParametricTimeBlock kParametricTimeBlockCircularInOut;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockCircularIn;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockCircularOut;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockCircularInOut;
 
-extern const ParametricTimeBlock kParametricTimeBlockExpoIn;
-extern const ParametricTimeBlock kParametricTimeBlockExpoOut;
-extern const ParametricTimeBlock kParametricTimeBlockExpoInOut;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockExpoIn;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockExpoOut;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockExpoInOut;
 
-extern const ParametricTimeBlock kParametricTimeBlockSineIn;
-extern const ParametricTimeBlock kParametricTimeBlockSineOut;
-extern const ParametricTimeBlock kParametricTimeBlockSineInOut;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockSineIn;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockSineOut;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockSineInOut;
 
-extern const ParametricTimeBlock kParametricTimeBlockBounceIn;
-extern const ParametricTimeBlock kParametricTimeBlockBounceOut;
-extern const ParametricTimeBlock kParametricTimeBlockBounceInOut;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockBounceIn;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockBounceOut;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockBounceInOut;
 
-extern const ParametricTimeBlock kParametricTimeBlockElasticIn;
-extern const ParametricTimeBlock kParametricTimeBlockElasticOut;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockElasticIn;
+extern const JMJParametricAnimationTimeBlock JMJParametricAnimationTimeBlockElasticOut;
 
+
+#pragma mark - time block constructors
 /**
- * @see elasticParametricTimeBlockWithEaseIn:period:amplitude:andShiftRatio:
+ * @see elasticJMJParametricAnimationTimeBlockWithEaseIn:period:amplitude:andShiftRatio:
  */
-+ (ParametricTimeBlock)elasticParametricTimeBlockWithEaseIn:(BOOL)easeIn
++ (JMJParametricAnimationTimeBlock)elasticJMJParametricAnimationTimeBlockWithEaseIn:(BOOL)easeIn
                                                      period:(double)period
                                                   amplitude:(double)amplitude;
 /**
@@ -102,17 +104,21 @@ extern const ParametricTimeBlock kParametricTimeBlockElasticOut;
  *
  * @return an elastic time block with the desired settings
  */
-+ (ParametricTimeBlock)elasticParametricTimeBlockWithEaseIn:(BOOL)easeIn
++ (JMJParametricAnimationTimeBlock)elasticJMJParametricAnimationTimeBlockWithEaseIn:(BOOL)easeIn
                                                      period:(double)period
                                                   amplitude:(double)amplitude
                                               andShiftRatio:(double)shiftRatio;
-#pragma mark - value blocks
-extern const ParametricValueBlock kParametricValueBlockDouble;
-extern const ParametricValueBlock kParametricValueBlockPoint;
-extern const ParametricValueBlock kParametricValueBlockSize;
-extern const ParametricValueBlock kParametricValueBlockRect;
-extern const ParametricValueBlock kParametricValueBlockColor;
 
+
+#pragma mark - value blocks
+extern const JMJParametricValueBlock JMJParametricValueBlockDouble;
+extern const JMJParametricValueBlock JMJParametricValueBlockPoint;
+extern const JMJParametricValueBlock JMJParametricValueBlockSize;
+extern const JMJParametricValueBlock JMJParametricValueBlockRect;
+extern const JMJParametricValueBlock JMJParametricValueBlockColor;
+
+
+#pragma mark - value block constructors
 /**
  * A method for creating special value blocks which interpolate along an arc about a point (center)
  * with the radius specified here. When using an arc path value block, fromValue and toValue should
@@ -124,12 +130,12 @@ extern const ParametricValueBlock kParametricValueBlockColor;
  *
  * @return a value block
  */
-+ (ParametricValueBlock)arcPathParametricValueBlockWithRadius:(CGFloat)radius
++ (JMJParametricValueBlock)arcPathJMJParametricValueBlockWithRadius:(CGFloat)radius
                                                     andCenter:(CGPoint)center;
 
 
 #pragma mark - bezier curves
-extern const double (^kParametricBezierEvaluator)(double time, CGPoint ct1, CGPoint ct2);
+extern const double (^JMJParametricAnimationBezierEvaluator)(double time, CGPoint ct1, CGPoint ct2);
 
 
 #pragma mark - linear interpolation

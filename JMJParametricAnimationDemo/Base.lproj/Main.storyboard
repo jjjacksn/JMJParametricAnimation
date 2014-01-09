@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Animation Catalog Controller-->
         <scene sceneID="43E-p5-SbM">
             <objects>
-                <viewController id="KGi-6A-nEJ" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="KGi-6A-nEJ" customClass="JMJAnimationCatalogController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0Ze-GU-86p"/>
                         <viewControllerLayoutGuide type="bottom" id="b2X-OU-lJy"/>

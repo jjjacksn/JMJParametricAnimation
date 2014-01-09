@@ -1,70 +1,70 @@
-#import "CAKeyframeAnimation+Parametric.h"
+#import "CAKeyframeAnimation+JMJParametricAnimation.h"
 
-@implementation CAKeyframeAnimation (Parametric)
+@implementation CAKeyframeAnimation (JMJParametricAnimation)
 
 
 #pragma mark - convenience constructors
 
 + (id)animationWithKeyPath:(NSString *)path
-                   timeFxn:(ParametricTimeBlock)timeFxn
+                   timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
                 fromDouble:(double)fromValue
                   toDouble:(double)toValue
 {
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:path
                                                                        timeFxn:timeFxn
-                                                                      valueFxn:kParametricValueBlockDouble
+                                                                      valueFxn:JMJParametricValueBlockDouble
                                                                      fromValue:@(fromValue)
                                                                        toValue:@(toValue)];
     return animation;
 }
 
 + (id)animationWithKeyPath:(NSString *)path
-                   timeFxn:(ParametricTimeBlock)timeFxn
+                   timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
                  fromPoint:(CGPoint)fromValue
                    toPoint:(CGPoint)toValue
 {
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:path
                                                                        timeFxn:timeFxn
-                                                                      valueFxn:kParametricValueBlockPoint
+                                                                      valueFxn:JMJParametricValueBlockPoint
                                                                      fromValue:[NSValue valueWithCGPoint:fromValue]
                                                                        toValue:[NSValue valueWithCGPoint:toValue]];
     return animation;
 }
 
 + (id)animationWithKeyPath:(NSString *)path
-                   timeFxn:(ParametricTimeBlock)timeFxn
+                   timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
                   fromSize:(CGSize)fromValue
                     toSize:(CGSize)toValue
 {
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:path
                                                                        timeFxn:timeFxn
-                                                                      valueFxn:kParametricValueBlockSize
+                                                                      valueFxn:JMJParametricValueBlockSize
                                                                      fromValue:[NSValue valueWithCGSize:fromValue]
                                                                        toValue:[NSValue valueWithCGSize:toValue]];
     return animation;
 }
 
 + (id)animationWithKeyPath:(NSString *)path
-                   timeFxn:(ParametricTimeBlock)timeFxn
+                   timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
                   fromRect:(CGRect)fromValue
                     toRect:(CGRect)toValue
 {
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:path
                                                                        timeFxn:timeFxn
-                                                                      valueFxn:kParametricValueBlockRect
+                                                                      valueFxn:JMJParametricValueBlockRect
                                                                      fromValue:[NSValue valueWithCGRect:fromValue]
                                                                        toValue:[NSValue valueWithCGRect:toValue]];
     return animation;
 }
 
 + (id)animationWithKeyPath:(NSString *)path
-                   timeFxn:(ParametricTimeBlock)timeFxn
+                   timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
                  fromColor:(CGColorRef)fromValue
                    toColor:(CGColorRef)toValue
 {
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:path
                                                                        timeFxn:timeFxn
-                                                                      valueFxn:kParametricValueBlockColor
+                                                                      valueFxn:JMJParametricValueBlockColor
                                                                      fromValue:(__bridge id)fromValue
                                                                        toValue:(__bridge id)toValue];
     return animation;
@@ -74,8 +74,8 @@
 #pragma mark - generic core
 
 + (id)animationWithKeyPath:(NSString *)path
-                   timeFxn:(ParametricTimeBlock)timeFxn
-                  valueFxn:(ParametricValueBlock)valueFxn
+                   timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
+                  valueFxn:(JMJParametricValueBlock)valueFxn
                  fromValue:(NSValue *)fromValue
                    toValue:(NSValue *)toValue;
 {
@@ -84,13 +84,13 @@
                                                                       valueFxn:valueFxn
                                                                      fromValue:fromValue
                                                                        toValue:toValue
-                                                                       inSteps:kParametricAnimationNumSteps];
+                                                                       inSteps:JMJParametricAnimationNumSteps];
     return animation;
 }
 
 + (id)animationWithKeyPath:(NSString *)path
-                   timeFxn:(ParametricTimeBlock)timeFxn
-                  valueFxn:(ParametricValueBlock)valueFxn
+                   timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
+                  valueFxn:(JMJParametricValueBlock)valueFxn
                  fromValue:(NSValue *)fromValue
                    toValue:(NSValue *)toValue
                    inSteps:(NSUInteger)numSteps

@@ -1,11 +1,11 @@
 #import <UIKit/UIKit.h>
-#import "ParametricAnimationBlocks.h"
+#import "JMJParametricAnimationBlocks.h"
 
 /**
- *
+ * This is only supported in iOS 7 and later.
  */
 
-@interface UIView (Parametric)
+@interface UIView (JMJParametricAnimation)
 
 
 #pragma mark - convenience methods
@@ -19,7 +19,7 @@
               duration:(NSTimeInterval)duration
                  delay:(NSTimeInterval)delay
             completion:(void (^)(BOOL))completion
-               timeFxn:(ParametricTimeBlock)timeFxn
+               timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
             fromDouble:(double)fromValue
               toDouble:(double)toValue;
 
@@ -32,7 +32,7 @@
               duration:(NSTimeInterval)duration
                  delay:(NSTimeInterval)delay
             completion:(void (^)(BOOL))completion
-               timeFxn:(ParametricTimeBlock)timeFxn
+               timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
              fromPoint:(CGPoint)fromValue
                toPoint:(CGPoint)toValue;
 
@@ -45,7 +45,7 @@
               duration:(NSTimeInterval)duration
                  delay:(NSTimeInterval)delay
             completion:(void (^)(BOOL))completion
-               timeFxn:(ParametricTimeBlock)timeFxn
+               timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
               fromSize:(CGSize)fromValue
                 toSize:(CGSize)toValue;
 
@@ -58,7 +58,7 @@
               duration:(NSTimeInterval)duration
                  delay:(NSTimeInterval)delay
             completion:(void (^)(BOOL))completion
-               timeFxn:(ParametricTimeBlock)timeFxn
+               timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
               fromRect:(CGRect)fromValue
                 toRect:(CGRect)toValue;
 
@@ -71,7 +71,7 @@
               duration:(NSTimeInterval)duration
                  delay:(NSTimeInterval)delay
             completion:(void (^)(BOOL))completion
-               timeFxn:(ParametricTimeBlock)timeFxn
+               timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
           fromColorRef:(CGColorRef)fromValue
             toColorRef:(CGColorRef)toValue;
 
@@ -90,8 +90,8 @@
               duration:(NSTimeInterval)duration
                  delay:(NSTimeInterval)delay
             completion:(void (^)(BOOL))completion
-              xTimeFxn:(ParametricTimeBlock)xTimeFxn
-              yTimeFxn:(ParametricTimeBlock)yTimeFxn
+              xTimeFxn:(JMJParametricAnimationTimeBlock)xTimeFxn
+              yTimeFxn:(JMJParametricAnimationTimeBlock)yTimeFxn
              fromPoint:(CGPoint)fromValue
                toPoint:(CGPoint)toValue;
 
@@ -107,8 +107,8 @@
               duration:(NSTimeInterval)duration
                  delay:(NSTimeInterval)delay
             completion:(void (^)(BOOL))completion
-          widthTimeFxn:(ParametricTimeBlock)widthTimeFxn
-         heightTimeFxn:(ParametricTimeBlock)heightTimeFxn
+          widthTimeFxn:(JMJParametricAnimationTimeBlock)widthTimeFxn
+         heightTimeFxn:(JMJParametricAnimationTimeBlock)heightTimeFxn
               fromSize:(CGSize)fromValue
                 toSize:(CGSize)toValue;
 
@@ -131,8 +131,8 @@
               duration:(NSTimeInterval)duration
                  delay:(NSTimeInterval)delay
             completion:(void (^)(BOOL))completion
-               timeFxn:(ParametricTimeBlock)timeFxn
-              valueFxn:(ParametricValueBlock)valueFxn
+               timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
+              valueFxn:(JMJParametricValueBlock)valueFxn
              fromValue:(id)fromValue
                toValue:(id)toValue;
 
@@ -146,8 +146,8 @@
               duration:(NSTimeInterval)duration
                  delay:(NSTimeInterval)delay
             completion:(void (^)(BOOL))completion
-               timeFxn:(ParametricTimeBlock)timeFxn
-              valueFxn:(ParametricValueBlock)valueFxn
+               timeFxn:(JMJParametricAnimationTimeBlock)timeFxn
+              valueFxn:(JMJParametricValueBlock)valueFxn
              fromValue:(id)fromValue
                toValue:(id)toValue
                inSteps:(NSUInteger)numSteps;
@@ -161,7 +161,7 @@
  */
 + (void)animateParametricallyWithDuration:(NSTimeInterval)duration
                                     delay:(NSTimeInterval)delay
-                               animations:(ParametricAnimationBlock)animations
+                               animations:(JMJParametricAnimationBlock)animations
                                completion:(void (^)(BOOL))completion;
 
 
@@ -172,7 +172,7 @@
  */
 + (void)animateParametricallyWithDuration:(NSTimeInterval)duration
                                     delay:(NSTimeInterval)delay
-                               animations:(ParametricAnimationBlock)animations
+                               animations:(JMJParametricAnimationBlock)animations
                                completion:(void (^)(BOOL))completion
                                   inSteps:(NSUInteger)numSteps;
 
