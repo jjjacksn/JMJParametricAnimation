@@ -1,0 +1,16 @@
+PODS:
+  - JMJParametricAnimation (1.0)
+
+DEPENDENCIES:
+  - JMJParametricAnimation (from `../`)
+
+EXTERNAL SOURCES:
+  JMJParametricAnimation:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  JMJParametricAnimation: 9041dd1dae1af059da42f4bfd415089bb1c2fedf
+
+PODFILE CHECKSUM: 4e79245ba04f3a5f50099106eb16e6c9286a5fd0
+
+COCOAPODS: 1.0.0

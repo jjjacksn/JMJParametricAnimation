@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'JMJParametricAnimation_Example' do
+  pod 'JMJParametricAnimation', :path => '../'
+
+  target 'JMJParametricAnimation_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

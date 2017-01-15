@@ -286,48 +286,33 @@ didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 
 #pragma mark – UICollectionViewDelegateFlowLayout
 
-static const CGFloat kCellSizeIPadPortrait = 182;
-static const CGFloat kCellSizeIPadLandscape = 160;
-static const CGFloat kCellSizeIPhonePortrait = 148;
-static const CGFloat kCellSizeIPhoneLandscape = 132;
-
 static const CGFloat kMargins = 8;
-static const CGFloat kMarginsIPadLandscape = 12;
+
+static const CGFloat kMaxCellSize = 200;
+static const CGFloat kMinCellSize = 180;
+
+static const NSInteger kMinColumns = 2;
+static const NSInteger kMaxColumns = 8;
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize cellSize;
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation)) {
-            cellSize = CGSizeMake(kCellSizeIPadPortrait, kCellSizeIPadPortrait);
-        } else {
-            cellSize = CGSizeMake(kCellSizeIPadLandscape, kCellSizeIPadLandscape);
-        }
-    }
-    else {
-        // iphone
-        if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait) {
-            cellSize = CGSizeMake(kCellSizeIPhonePortrait, kCellSizeIPhonePortrait);
-        } else {
-            cellSize = CGSizeMake(kCellSizeIPhoneLandscape, kCellSizeIPhoneLandscape);
-        }
-    }
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
 
-    return cellSize;
+    CGFloat numColsWithMin = (screenWidth - kMargins) / (kMinCellSize + kMargins);
+    CGFloat numColsWithMax = (screenWidth - kMargins) / (kMaxCellSize + kMargins);
+    NSInteger numColumns = MAX(kMinColumns, MIN(floor(numColsWithMin + numColsWithMax / 2.0), kMaxColumns));
+
+    CGFloat cellWidth = (screenWidth - kMargins) / numColumns - kMargins;
+    return CGSizeMake(cellWidth, cellWidth);
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
                         layout:(UICollectionViewLayout *)collectionViewLayout
         insetForSectionAtIndex:(NSInteger)section
 {
-    CGFloat horizontalMargin = kMargins;
-    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)
-        && [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        horizontalMargin = kMarginsIPadLandscape;
-    }
-    return UIEdgeInsetsMake(kMargins, horizontalMargin, kMargins, horizontalMargin);
+    return UIEdgeInsetsMake(kMargins, kMargins, kMargins, kMargins);
 }
 
 -                (CGFloat)collectionView:(UICollectionView *)collectionView

@@ -1,10 +1,18 @@
-#import <XCTest/XCTest.h>
+//
+//  JMJParametricAnimationTests.m
+//  JMJParametricAnimationTests
+//
+//  Created by J.J. Jackson on 01/14/2017.
+//  Copyright (c) 2017 J.J. Jackson. All rights reserved.
+//
 
-@interface JMJParametricAnimationDemoTests : XCTestCase
+@import XCTest;
+
+@interface Tests : XCTestCase
 
 @end
 
-@implementation JMJParametricAnimationDemoTests
+@implementation Tests
 
 - (void)setUp
 {
@@ -24,3 +32,4 @@
 }
 
 @end
+
